@@ -1,0 +1,73 @@
+@use "sass:math";
+
+// Подключение миксинов
+@import "components/mixins";
+
+
+// Подключение шрифтов
+//&display=swap - добавить при подключении через плагин
+// @import url("https://fonts.googleapis.com/css?family=League+Spartan:300,regular,500,600,700&display=swap");
+
+// Подключить если есть локальные файлы шрифтов
+@import "fonts/fonts";
+
+// Подключить если есть файл иконочного шрифта
+//@import "fonts/icons";
+
+// Настройки адаптивной сетки
+
+// Минимальная ширина страницы
+// $minWidth: 260;
+// Ширина полотна (макета)
+$maxWidth: 1920;
+// Ширина ограничивающего контейнера (0 = нет ограничения)
+$maxWidthContainer: 1280;
+// Общий отступ у контейнера
+// (30 = по 15px слева и справа, 0 = нет отступа)
+$containerPadding: 20;
+
+// Ширина срабатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+// Брейк-поинты
+$pc: em($containerWidth); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
+$mobile: em(767.98); // Телефоны L
+$mobileSmall: em(479.98); // Телефоны S
+
+
+@import "components/tailwind";
+// @import "base/null";
+
+
+:root {
+	--tr-dur: 250ms;
+	--tr-fun: ease-out;
+}
+
+// Оболочка wrapper
+.wrapper {
+
+	>main {}
+
+	>* {
+		min-width: 0;
+	}
+}
+
+
+@import "base";
+
+
+// swiper
+// @import "base/swiper";
+
+// Подключение стилей отдельных блоков
+@import "header";
+@import "footer";
+
+// Подключение стилей отдельн
+
+// Подключение стилей отдельных страниц
+@import "pages/home";
+// @import "pages/error-404";

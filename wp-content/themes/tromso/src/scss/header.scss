@@ -1,0 +1,50 @@
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 50;
+	transition: all 0.3s;
+	background: transparent;
+}
+
+header.scrolled {
+	background: rgba(13, 25, 54, 0.95);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu {
+	display: none;
+}
+
+header.menu-open .mobile-menu {
+	display: block;
+}
+
+.tours-dropdown {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	margin-top: 8px;
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+	padding: 8px 0;
+	min-width: 180px;
+}
+
+.desktop-header {
+	display: none;
+}
+
+@media (min-width: 768px) {
+	.desktop-header {
+		display: flex;
+	}
+
+	.mobile-toggle {
+		display: none;
+	}
+}
