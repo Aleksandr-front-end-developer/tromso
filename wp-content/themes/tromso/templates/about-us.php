@@ -47,38 +47,29 @@ get_header();
 		</div>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
 			<div class="text-center p-6 bg-white rounded-xl shadow-md">
-				<div class="bg-ice-blue w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-					<svg class="svg svg--stroke lucide lucide-mountain text-white" width="32" height="32">
-						<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#mountain'; ?>"></use>
-					</svg>
-
+				<div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #0891b2;">
+					<img width="32" height="32" class="" src="/wp-content/uploads/2025/10/mountain.svg" alt="">
 				</div>
 				<h3 class="text-2xl font-bold text-gray-900 mb-2">10+</h3>
 				<p class="text-gray-600">Years Experience</p>
 			</div>
 			<div class="text-center p-6 bg-white rounded-xl shadow-md">
-				<div class="bg-aurora-green w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-					<svg class="svg svg--stroke lucide lucide-users text-white" width="32" height="32">
-						<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#users'; ?>"></use>
-					</svg>
+				<div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #10b981;">
+					<img width="32" height="32" class="" src="/wp-content/uploads/2025/10/users.svg" alt="">
 				</div>
 				<h3 class="text-2xl font-bold text-gray-900 mb-2">50,000+</h3>
 				<p class="text-gray-600">Happy Travelers</p>
 			</div>
 			<div class="text-center p-6 bg-white rounded-xl shadow-md">
-				<div class="bg-yellow-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-					<svg class="svg svg--stroke lucide lucide-award text-white" width="32" height="32">
-						<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#award'; ?>"></use>
-					</svg>
+				<div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #eab308;">
+					<img width="32" height="32" class="" src="/wp-content/uploads/2025/10/award.svg" alt="">
 				</div>
 				<h3 class="text-2xl font-bold text-gray-900 mb-2">25+</h3>
 				<p class="text-gray-600">Partner Operators</p>
 			</div>
 			<div class="text-center p-6 bg-white rounded-xl shadow-md">
-				<div class="bg-red-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-					<svg class="svg svg--stroke lucide lucide-heart text-white" width="32" height="32">
-						<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#heart'; ?>"></use>
-					</svg>
+				<div class=" w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #ef4444;">
+					<img width="32" height="32" class="" src="/wp-content/uploads/2025/10/heart.svg" alt="">
 				</div>
 				<h3 class="text-2xl font-bold text-gray-900 mb-2">4.8/5</h3>
 				<p class="text-gray-600">Average Rating</p>
