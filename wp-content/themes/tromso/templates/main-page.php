@@ -97,7 +97,7 @@ $post_id = get_the_ID();
 					<div class=" w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto" style="background-color: <?php echo $card['image_background']; ?>;">
           <?php
           $image = intval($card['image']);
-          if ($image>0) echo wp_get_attachment_image( $image, 'full', false, array('sizes'=>array(32, 32)) );
+          if ($image>0) echo wp_get_attachment_image( $image, array(32, 32), false );
           ?>
 					</div>
 					<h3 class="text-xl font-bold text-deep-blue mb-3 text-center"><?php echo $card['title']; ?></h3>
@@ -151,7 +151,7 @@ $post_id = get_the_ID();
 					<div class=" w-16 h-16 rounded-full flex items-center justify-center mb-4" style="background-color: <?php echo $card['image_background']; ?>;">
           <?php
           $image = intval($card['image']);
-          if ($image>0) echo wp_get_attachment_image( $image, 'full', false, array('sizes'=>array(32, 32)) );
+          if ($image>0) echo wp_get_attachment_image( $image, array(32, 32), false );
           ?>
 					</div>
 					<div class="text-center">

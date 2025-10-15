@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Home
+ * Template Name: Home Верстка
  *
  * Front page php tempate
  */

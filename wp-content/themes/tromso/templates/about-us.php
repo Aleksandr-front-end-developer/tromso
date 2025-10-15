@@ -7,97 +7,100 @@
  */
 
 get_header();
+
+$post_id = get_the_ID();
 ?>
 <main id="main" class="main">
 
-	<?php get_template_part('template-parts/page', 'hero');	  ?>
+	<?php get_template_part('template-parts/page', 'header', array('title'=>carbon_get_post_meta($post_id, 'au_section_1_title'), 'description'=>carbon_get_post_meta($post_id, 'au_section_1_description')));	  ?>
 
 	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-		<div class="grid md:grid-cols-2 gap-12 mb-16">
-			<div>
-				<img src="/wp-content/uploads/2025/10/pexels-photo-1054218.jpeg" alt="Tromsø Northern Lights" class="rounded-xl shadow-lg w-full h-[400px] object-cover" />
-			</div>
-			<div class="flex flex-col justify-center">
-				<h2 class="text-3xl font-bold text-gray-900 mb-4">Our Story</h2>
-				<p class="text-gray-600 mb-4 leading-relaxed">
-					Founded by Arctic enthusiasts with deep roots in Tromsø, we've been connecting travelers with the magic of Northern Norway for years. Our passion for the Arctic wilderness
-					and commitment to sustainable tourism drives everything we do.
-				</p>
-				<p class="text-gray-600 leading-relaxed">
-					We partner with the most reputable local tour operators to ensure you experience the very best of Tromsø - from chasing the Northern Lights to whale watching in pristine
-					fjords. Every tour we recommend has been personally vetted by our team.
-				</p>
-			</div>
-		</div>
+    <?php
+    $blocks = carbon_get_post_meta($post_id, 'au_section_2_blocks');
+    if (is_array($blocks))
+    {
+      foreach ($blocks as $block)
+      {
+        if ($block['image_side']=='r')
+        {
+        ?>
 		<div class="grid md:grid-cols-2 gap-12 mb-16">
 			<div class="flex flex-col justify-center order-2 md:order-1">
-				<h2 class="text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
-				<p class="text-gray-600 mb-4 leading-relaxed">
-					To make Arctic adventures accessible to everyone while preserving the pristine beauty of Northern Norway for future generations. We believe in responsible tourism that
-					benefits local communities and protects the environment.
-				</p>
-				<p class="text-gray-600 leading-relaxed">
-					We work exclusively with operators who share our values of sustainability, safety, and authentic experiences. Your adventure should leave you with incredible memories and a
-					deep appreciation for the Arctic.
-				</p>
+				<h2 class="text-3xl font-bold text-gray-900 mb-4"><?php echo $block['title']; ?></h2>
+				<div class="text-gray-600 mb-4 leading-relaxed"><?php echo wpautop($block['description']); ?></div>
 			</div>
 			<div class="order-1 md:order-2">
-				<img src="/wp-content/uploads/2025/10/pexels-photo-3408744.jpeg" alt="Tromsø Winter Adventure" class="rounded-xl shadow-lg w-full h-[400px] object-cover" />
+        <?php
+        $image = intval($block['image']);
+        if ($image>0) echo wp_get_attachment_image( $image, 'full', false, array('class'=>'rounded-xl shadow-lg w-full h-[400px] object-cover') );
+        ?>
 			</div>
 		</div>
+        <?php  
+        } else
+        {
+        ?>
+		<div class="grid md:grid-cols-2 gap-12 mb-16">
+			<div>
+        <?php
+        $image = intval($block['image']);
+        if ($image>0) echo wp_get_attachment_image( $image, 'full', false, array('class'=>'rounded-xl shadow-lg w-full h-[400px] object-cover') );
+        ?>
+			</div>
+			<div class="flex flex-col justify-center">
+				<h2 class="text-3xl font-bold text-gray-900 mb-4"><?php echo $block['title']; ?></h2>
+				<div class="text-gray-600 mb-4 leading-relaxed"><?php echo wpautop($block['description']); ?></div>
+			</div>
+		</div>
+        <?php  
+        }
+      }
+    }
+    ?>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+      <?php
+      $cards = carbon_get_post_meta($post_id, 'au_section_3_cards');
+      if (is_array($cards))
+      {
+        foreach ($cards as $card)
+        {
+      ?>
 			<div class="text-center p-6 bg-white rounded-xl shadow-md">
-				<div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #0891b2;">
-					<img width="32" height="32" class="" src="/wp-content/uploads/2025/10/mountain.svg" alt="">
+				<div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: <?php echo $card['image_background']; ?>;">
+          <?php
+          $image = intval($card['image']);
+          if ($image>0) echo wp_get_attachment_image( $image, array(32,32), false );
+          ?>
 				</div>
-				<h3 class="text-2xl font-bold text-gray-900 mb-2">10+</h3>
-				<p class="text-gray-600">Years Experience</p>
+				<h3 class="text-2xl font-bold text-gray-900 mb-2"><?php echo $card['title']; ?></h3>
+				<div class="text-gray-600"><?php echo wpautop($card['description']); ?></div>
 			</div>
-			<div class="text-center p-6 bg-white rounded-xl shadow-md">
-				<div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #10b981;">
-					<img width="32" height="32" class="" src="/wp-content/uploads/2025/10/users.svg" alt="">
-				</div>
-				<h3 class="text-2xl font-bold text-gray-900 mb-2">50,000+</h3>
-				<p class="text-gray-600">Happy Travelers</p>
-			</div>
-			<div class="text-center p-6 bg-white rounded-xl shadow-md">
-				<div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #eab308;">
-					<img width="32" height="32" class="" src="/wp-content/uploads/2025/10/award.svg" alt="">
-				</div>
-				<h3 class="text-2xl font-bold text-gray-900 mb-2">25+</h3>
-				<p class="text-gray-600">Partner Operators</p>
-			</div>
-			<div class="text-center p-6 bg-white rounded-xl shadow-md">
-				<div class=" w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #ef4444;">
-					<img width="32" height="32" class="" src="/wp-content/uploads/2025/10/heart.svg" alt="">
-				</div>
-				<h3 class="text-2xl font-bold text-gray-900 mb-2">4.8/5</h3>
-				<p class="text-gray-600">Average Rating</p>
-			</div>
+      <?php    
+        }
+      }
+      ?>
 		</div>
 		<div class="bg-gradient-to-r from-ice-blue to-deep-blue rounded-xl p-8 md:p-12 text-white text-center">
-			<h2 class="text-3xl font-bold mb-4">Why Choose Us?</h2>
+			<h2 class="text-3xl font-bold mb-4"><?php echo carbon_get_post_meta($post_id, 'au_section_4_title'); ?></h2>
 			<div class="grid md:grid-cols-3 gap-8 mt-8">
+        <?php
+        $blocks = carbon_get_post_meta($post_id, 'au_section_4_blocks');
+        if (is_array($blocks))
+        {
+          foreach ($blocks as $block)
+          {
+        ?>
 				<div>
-					<h3 class="text-xl font-bold mb-2">Expert Curation</h3>
-					<p class="text-white/90">Every tour is personally selected and vetted by our Arctic experts</p>
+					<h3 class="text-xl font-bold mb-2"><?php echo $block['title']; ?></h3>
+					<div class="text-white/90"><?php echo wpautop($block['description']); ?></div>
 				</div>
-				<div>
-					<h3 class="text-xl font-bold mb-2">Best Price Guarantee</h3>
-					<p class="text-white/90">We work directly with operators to ensure competitive pricing</p>
-				</div>
-				<div>
-					<h3 class="text-xl font-bold mb-2">24/7 Support</h3>
-					<p class="text-white/90">Our team is here to help before, during, and after your trip</p>
-				</div>
+        <?php    
+          }
+        }
+        ?>
 			</div>
 		</div>
 	</div>
-
-
-
-
-
 </main>
 <?php
 get_footer();

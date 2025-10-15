@@ -121,4 +121,149 @@ function pages_options() {
         )),
       ));
 
+
+    //Для About Us
+    Container::make( 'post_meta', 2, 'About Us page settings' )
+		  ->where( 'post_template', '=', 'templates/about-us.php' )
+      ->add_tab( 'Header', array(
+        Field::make('text', 'au_section_1_title', 'Title'),
+        Field::make('rich_text', 'au_section_1_description', 'Description'),
+      ))
+      ->add_tab( 'Texts with images blocks', array(
+        Field::make( 'complex', 'au_section_2_blocks', 'Texts with images blocks' )
+        ->set_layout( 'tabbed-horizontal' )
+        ->add_fields( array(
+          Field::make( 'radio', 'image_side', 'Image side' )
+          ->set_width( 33 )
+          ->set_options( array(
+            'r' => 'Right',
+            '' => 'Left'
+          ))
+          ->set_default_value( '' ),
+          Field::make('image', 'image', 'Image')
+          ->set_width( 20 ),
+          Field::make('text', 'title', 'Title')
+          ->set_width( 46 ),
+          Field::make( 'rich_text', 'description', 'Description' ),
+        )),
+      ))
+      ->add_tab( 'Cards', array(
+        Field::make( 'complex', 'au_section_3_cards', 'Cards' )
+        ->set_layout( 'tabbed-horizontal' )
+        ->add_fields( array(
+          Field::make('color', 'image_background', 'Image background color')
+          ->set_width( 33 ),
+          Field::make( 'image', 'image', 'Image' )
+          ->set_width( 33 ),
+          Field::make( 'text', 'title', 'Title' )
+          ->set_width( 33 ),
+          Field::make( 'rich_text', 'description', 'Description' ),
+        )),
+      ))
+      ->add_tab( 'Resume block', array(
+        Field::make('text', 'au_section_4_title', 'Title'),
+        Field::make( 'complex', 'au_section_4_blocks', 'Cards' )
+        ->set_layout( 'tabbed-horizontal' )
+        ->add_fields( array(
+          Field::make( 'text', 'title', 'Title' ),
+          Field::make( 'rich_text', 'description', 'Description' ),
+        )),
+      ));
+
+
+    //Для Contact
+    Container::make( 'post_meta', 2, 'Contact page settings' )
+		  ->where( 'post_template', '=', 'templates/contact.php' )
+      ->add_tab( 'Header', array(
+        Field::make('text', 'cnt_section_1_title', 'Title'),
+        Field::make('rich_text', 'cnt_section_1_description', 'Description'),
+      ))
+      ->add_tab( 'Left block', array(
+        Field::make('text', 'cnt_section_2_title', 'Title'),
+        Field::make('rich_text', 'cnt_section_2_description', 'Description'),
+        Field::make('text', 'cnt_section_2_email_title', 'Email title')
+        ->set_width( 50 ),
+        Field::make('text', 'cnt_section_2_email', 'Email')
+        ->set_width( 50 ),
+        Field::make('text', 'cnt_section_2_phone_title', 'Phone title')
+        ->set_width( 50 ),
+        Field::make('text', 'cnt_section_2_phone', 'Phone')
+        ->set_width( 50 ),
+        Field::make('rich_text', 'cnt_section_2_phone_description', 'Phone description'),
+        Field::make('text', 'cnt_section_2_address_title', 'Address title')
+        ->set_width( 50 ),
+        Field::make('text', 'cnt_section_2_address', 'Address')
+        ->set_width( 50 ),
+        Field::make('text', 'cnt_section_2_work_time', 'Work time title'),
+        Field::make('rich_text', 'cnt_section_2_work_time_description', 'Work time description'),
+      ))
+      ->add_tab( 'Right block', array(
+        Field::make('text', 'cnt_section_3_title', 'Title'),
+        Field::make('text', 'cnt_section_2_contact_form', 'Contact form shortcode'),
+      ));
+      
+
+    //Для Contact
+    Container::make( 'post_meta', 2, 'Sitemap page settings' )
+		  ->where( 'post_template', '=', 'templates/sitemap.php' )
+      ->add_tab( 'Header', array(
+        Field::make('text', 'stm_section_1_title', 'Title'),
+        Field::make('rich_text', 'stm_section_1_description', 'Description'),
+      ))
+      ->add_tab( 'Pages list block', array(
+        Field::make( 'complex', 'stm_section_2_list', 'Blocks' )
+        ->set_layout( 'tabbed-horizontal' )
+        ->add_fields( array(
+          Field::make('text', 'title', 'Title')
+          ->set_width( 50 ),
+          Field::make( 'radio_image', 'icon', 'Block icon' )
+          ->set_width( 50 )
+          ->set_options( array(
+            'home' => THEME_URI . '/assets/img/icons/sitemap_icon2.png',
+            'page1' => THEME_URI . '/assets/img/icons/sitemap_icon1.png',
+            'page2' => THEME_URI . '/assets/img/icons/sitemap_icon3.png',
+          ) ),
+          Field::make( 'radio', 'select_pages_from', 'List elements from' )
+          ->set_options( array(
+            'list' => 'pages list',
+            'custom' => 'custom URLs',
+          ) ),
+          Field::make( 'association', 'pages_list', 'Select pages' )
+          ->set_types( array(
+              array(
+                  'type'      => 'post',
+                  'post_type' => 'page',
+              )
+          ) )
+          ->set_conditional_logic( array(
+              array(
+                  'field' => 'select_pages_from',
+                  'value' => 'list',
+                  'compare' => '=',
+              )
+          ) ),
+          Field::make( 'complex', 'custom_urls', 'Custom URLs' )
+          ->set_layout( 'tabbed-horizontal' )
+          ->add_fields( array(
+            Field::make( 'text', 'title', 'Title' ),
+            Field::make( 'text', 'url', 'URL' ),
+          ))
+          ->set_conditional_logic( array(
+              array(
+                  'field' => 'select_pages_from',
+                  'value' => 'custom',
+                  'compare' => '=',
+              )
+          ) ),
+        )),
+      ))
+      ->add_tab( 'Bottom block', array(
+        Field::make('text', 'stm_section_3_title', 'Title'),
+        Field::make('rich_text', 'stm_section_3_description', 'Description' ),
+        Field::make('text', 'stm_section_3_button_title', 'Button title')
+        ->set_width( 50 ),
+        Field::make('text', 'stm_section_3_button_url', 'Button URL' )
+        ->set_width( 50 ),
+     ));
+
 }
