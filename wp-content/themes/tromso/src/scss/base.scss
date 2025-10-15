@@ -66,8 +66,14 @@ form {
 /* Стилі для обгортки та іконки */
 
 .content {
+
+	&:empty {
+		padding: 0;
+	}
+
 	h2 {
 		--tw-text-opacity: 1;
+		margin-top: 2rem;
 		margin-bottom: 1rem;
 		font-weight: 700;
 		font-size: 1.5rem;
@@ -75,16 +81,38 @@ form {
 		color: rgb(17 24 39 / var(--tw-text-opacity, 1));
 	}
 
+	h3 {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		font-size: 1.3rem;
+		line-height: 1.7rem;
+	}
+
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+	}
+
 	p {
 		line-height: 1.625;
+		margin-bottom: 1rem;
 		--tw-text-opacity: 1;
 		color: rgb(75 85 99 / var(--tw-text-opacity, 1));
 	}
 
 	ul {
-
+		padding-left: rem(24);
 		--tw-text-opacity: 1;
 		list-style-type: disc;
+		margin-bottom: 1rem;
+		color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+	}
+
+	ol {
+		list-style-type: auto;
+		padding-left: rem(24);
 		margin-bottom: 1rem;
 		color: rgb(75 85 99 / var(--tw-text-opacity, 1));
 	}
