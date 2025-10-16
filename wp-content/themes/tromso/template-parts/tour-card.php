@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 min-h-[3.5rem]">Ultimate Aurora Hunt &amp; Citizen Science Adventure</h3>
+              <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 min-h-[3.5rem]"><?php echo $args['tour']['title']; ?></h3>
               <div class="mb-4">
                 <div class="flex items-center gap-1">
                   <?php echo get_rating_stars($args['tour']['rating'], 16); ?>
