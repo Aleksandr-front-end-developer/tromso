@@ -2258,9 +2258,19 @@ header.menu-open .mobile-menu {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
+.hero {
+  height: auto;
+  min-height: 100vh;
+}
+
 .hero-bg {
   background-size: cover;
   background-position: center center;
+}
+
+.hero-container {
+  padding-top: 6.25rem;
+  padding-bottom: 7.5rem;
 }
 
 @media (min-width: 768px) {
@@ -2362,5 +2372,12 @@ header.menu-open .mobile-menu {
   .lg\:text-7xl {
     font-size: 4.5rem;
     line-height: 1;
+  }
+}
+
+@media (max-width: 47.99875em) {
+  .hero h1.text-5xl {
+    font-size: 3rem;
+    line-height: 1.2;
   }
 }

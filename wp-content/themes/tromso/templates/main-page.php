@@ -12,12 +12,12 @@ $post_id = get_the_ID();
 ?>
 <main id="main" class="main">
 
-	<section class="relative h-screen flex items-center justify-center overflow-hidden">
+	<section class="hero relative h-screen flex items-center justify-center overflow-hidden">
 		<div
 			class="absolute inset-0 z-0 hero-bg" style="background-image:url(<?php echo wp_get_attachment_image_url(carbon_get_post_meta($post_id, 'section_1_image'), 'full'); ?>)">
 			<div class="absolute inset-0 bg-gradient-to-b from-deep-blue/70 via-deep-blue/50 to-deep-blue/70"></div>
 		</div>
-		<div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+		<div class="hero-container relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 			<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in"><?php echo carbon_get_post_meta($post_id, 'section_1_title'); ?></h1>
 			<h2 class="text-2xl sm:text-3xl text-white/90 mb-6 font-medium"><?php echo carbon_get_post_meta($post_id, 'section_1_subtitle'); ?></h2>
 			<div class="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed"><?php echo wpautop(carbon_get_post_meta($post_id, 'section_1_description')); ?></div>
