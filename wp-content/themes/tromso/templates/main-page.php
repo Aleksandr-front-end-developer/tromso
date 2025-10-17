@@ -159,11 +159,23 @@ $post_id = get_the_ID();
 			</div>
 		</section>
 
+		<?php /* section spollers  */ ?>
+		<section class=" bg-white section-spollers">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div data-spollers data-one-spoller class="spollers">
+					<div class="spollers__item">
+						<button type="button" data-spoller class="spollers__title text-xl text-gray-700 leading-relaxe">Do I need a tour for Arenal Volcano?</button>
+						<div class="spollers__body text-lg text-gray-600 leading-relaxed">While not mandatory, <a href="https://www.getyourguide.com/arenal-volcano-l87314/?partner_id=MME1WGW&amp;utm_medium=online_publisher&amp;deeplink_id=900f4c49-e22d-5cc3-995e-68c499c0d570&amp;page_id=6e97e4f0-98bd-576d-b56f-12f6bc86236b" target="_blank" rel="noopener" data-gyg-scraped="1760683858040">guided tours</a> are highly recommended for safety, wildlife spotting, and accessing the best viewpoints that independent travelers often miss.</div>
+					</div>
+					<div class="spollers__item">
+						<button type="button" data-spoller class="spollers__title text-xl text-gray-700 leading-relaxe">Do I need a tour for Arenal Volcano?</button>
+						<div class="spollers__body text-lg text-gray-600 leading-relaxed">While not mandatory, <a href="https://www.getyourguide.com/arenal-volcano-l87314/?partner_id=MME1WGW&amp;utm_medium=online_publisher&amp;deeplink_id=900f4c49-e22d-5cc3-995e-68c499c0d570&amp;page_id=6e97e4f0-98bd-576d-b56f-12f6bc86236b" target="_blank" rel="noopener" data-gyg-scraped="1760683858040">guided tours</a> are highly recommended for safety, wildlife spotting, and accessing the best viewpoints that independent travelers often miss.</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<div class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><?php the_content() ?></div>
-
-
-
 
 </main>
 <?php

@@ -1883,6 +1883,16 @@ form br {
 
 /* Стилі для обгортки та іконки */
 
+.content a {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94/var(--tw-text-opacity, 1));
+}
+
+.content a:hover,
+.content a:focus {
+  text-decoration: underline;
+}
+
 .content:empty {
   padding: 0;
 }
@@ -2258,6 +2268,12 @@ header.menu-open .mobile-menu {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
+.footer-column--last {
+  overflow: hidden;
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+
 .hero {
   height: auto;
   min-height: 100vh;
@@ -2271,6 +2287,111 @@ header.menu-open .mobile-menu {
 .hero-container {
   padding-top: 6.25rem;
   padding-bottom: 7.5rem;
+}
+
+.section-spollers {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.spollers {
+  display: grid;
+  gap: 0.9375rem;
+}
+
+.spollers a {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94/var(--tw-text-opacity, 1));
+}
+
+.spollers a:hover,
+.spollers a:focus {
+  text-decoration: underline;
+}
+
+.spollers__title {
+  width: 100%;
+  cursor: default;
+  text-align: left;
+  border: 0.0625rem solid #eee;
+  padding: 0.625rem 0.9375rem;
+  border-radius: 0.3125rem;
+  position: relative;
+}
+
+._spoller-init .spollers__title {
+  cursor: pointer;
+  /*
+  ._spoller-init & {
+  	position: relative;
+  	width: 100%;
+  	text-align: left;
+  	&::before,
+  	&::after {
+  		content: "";
+  		position: absolute;
+  		right: 0;
+  		top: rem(12);
+  		height: rem(1);
+  		transition: all 0.3s ease 0s;
+  		width: rem(10);
+  		background-color: #000;
+  	}
+  	&::before {
+  		transform: rotate(40deg);
+  		right: rem(7);
+  	}
+  	&::after {
+  		transform: rotate(-40deg);
+  	}
+  }
+  &._spoller-active {
+  	&::before {
+  		transform: rotate(-40deg);
+  	}
+  	&::after {
+  		transform: rotate(40deg);
+  	}
+  }
+  */
+}
+
+._spoller-init .spollers__title::before,
+._spoller-init .spollers__title::after {
+  content: "";
+  position: absolute;
+  right: 0.625rem;
+  top: 50%;
+  background-color: #000;
+  height: 0.125rem;
+  width: 0.625rem;
+  transition: transform 0.5s ease 0s;
+}
+
+._spoller-init .spollers__title::before {
+  transform: translate(-75%, -50%) rotate(40deg);
+}
+
+._spoller-init .spollers__title::after {
+  transform: translate(0, -50%) rotate(-40deg);
+}
+
+._spoller-init .spollers__title._spoller-active::before {
+  transform: translateX(-75%) rotate(-40deg);
+}
+
+._spoller-init .spollers__title._spoller-active::after {
+  transform: rotate(40deg);
+}
+
+.spollers__body {
+  padding: 1.25rem;
+  border-radius: 0.3125rem;
+  border: 0.0625rem solid #eee;
+}
+
+.card-description {
+  margin-bottom: 0.75rem;
 }
 
 @media (min-width: 768px) {
