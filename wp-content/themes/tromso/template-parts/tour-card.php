@@ -18,7 +18,7 @@
           	<div class="p-6">
           		<h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 min-h-[3.5rem]"><?php echo $args['tour']['title']; ?></h3>
           		<div class="card-description">
-          			<p>Take part in 3 amazing activities on 1 tour from La Fortuna. Hike the volcanic paths around the magnificent <strong>Arenal Volcano</strong>, witnessing <strong>Arenal Volcano’s</strong> dramatic landscapes up close. See the spectacular cascades of La Fortuna waterfall nestled in the <strong>Arenal Volcano</strong> region, and walk through the rainforest canopy on the suspension bridges of the Arenal Hanging Bridges park, offering breathtaking views of <strong>Arenal Volcano</strong> from above.</p>
+          			<?php echo wpautop($args['tour']['description']); ?>
           		</div>
           		<div class="mb-4">
           			<div class="flex items-center gap-1">

@@ -74,6 +74,7 @@ $post_id = get_the_ID();
 			}
 		}
 		?>
+  </div>
 
 		<section id="about" class="py-20 bg-gradient-to-b from-gray-50 to-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -176,7 +177,6 @@ $post_id = get_the_ID();
 		</section>
 
 		<div class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><?php the_content() ?></div>
-
 </main>
 <?php
 get_footer();

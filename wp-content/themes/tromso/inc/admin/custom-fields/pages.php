@@ -8,7 +8,7 @@ add_action( 'carbon_fields_register_fields', 'pages_options' );
 function pages_options() {
 
     //Для главной страницы
-    Container::make( 'post_meta', 1, 'Main page settings' )
+    Container::make( 'post_meta', 'Main page settings' )
 		  ->where( 'post_template', '=', 'templates/main-page.php' )
       ->add_tab( 'Header', array(
         Field::make('text', 'section_1_title', 'Title')
@@ -63,6 +63,7 @@ function pages_options() {
             ->set_width( 50 ),
             Field::make( 'image', 'image', 'Image' )
             ->set_width( 20 ),
+            Field::make('rich_text', 'description', 'Description'),
             Field::make( 'text', 'rating', 'Rating' )
             ->set_width( 25 )
             ->set_attribute( 'min', '1' )
@@ -123,7 +124,7 @@ function pages_options() {
 
 
     //Для About Us
-    Container::make( 'post_meta', 2, 'About Us page settings' )
+    Container::make( 'post_meta', 'About Us page settings' )
 		  ->where( 'post_template', '=', 'templates/about-us.php' )
       ->add_tab( 'Header', array(
         Field::make('text', 'au_section_1_title', 'Title'),
@@ -171,8 +172,69 @@ function pages_options() {
       ));
 
 
+    //Для About (new)
+    Container::make( 'post_meta', 'About Us (new) / Facts page settings' )
+		  ->where( 'post_template', 'IN', array('templates/about-new.php', 'templates/facts.php') )
+      ->add_tab( 'Header', array(
+        Field::make('text', 'aun_section_1_title', 'Title'),
+        Field::make('rich_text', 'aun_section_1_description', 'Description'),
+      ))
+      ->add_tab( 'Tour blocks', array(
+        Field::make('text', 'currency_symbol', 'Сurrency symbol'),
+        Field::make( 'complex', 'aun_tours', 'Tours blocks' )
+        ->set_layout( 'tabbed-vertical' )
+        ->add_fields( array(
+          Field::make('color', 'background', 'Background color')
+          ->set_width( 20 ),
+          Field::make('text', 'anchor', 'Anchor for internal links')
+          ->set_width( 20 ),
+          Field::make('text', 'title', 'Title')
+          ->set_width( 33 ),
+          Field::make( 'radio', 'underline', 'Do you want to underline the title?' )
+          ->set_options( array(
+            'y' => 'Yes',
+            '' => 'No',
+          ) )
+          ->set_width( 26 )
+          ->set_default_value( '' ),
+          Field::make( 'rich_text', 'description', 'Description' ),
+          Field::make( 'complex', 'tours', 'Tour cards' )
+          ->set_layout( 'tabbed-horizontal' )
+          ->add_fields( array(
+            Field::make( 'checkbox', 'best_seller', 'Best seller' )
+            ->set_width( 15 )
+            ->set_option_value( 'yes' ),
+            Field::make( 'checkbox', 'top_rated', 'Top_rated' )
+            ->set_width( 15 )
+            ->set_option_value( 'yes' ),
+            Field::make('text', 'title', 'Title')
+            ->set_width( 50 ),
+            Field::make( 'image', 'image', 'Image' )
+            ->set_width( 20 ),
+            Field::make('rich_text', 'description', 'Description'),
+            Field::make( 'text', 'rating', 'Rating' )
+            ->set_width( 25 )
+            ->set_attribute( 'min', '1' )
+            ->set_attribute( 'max', '5' )
+            ->set_attribute( 'step', '0.1' )
+            ->set_attribute( 'type', 'number' ),
+            Field::make( 'text', 'hours', 'Tour duration (hours)' )
+            ->set_width( 25 )
+            ->set_attribute( 'type', 'number' ),
+            Field::make( 'text', 'bookings', 'Number of bookings' )
+            ->set_width( 25 )
+            ->set_attribute( 'type', 'number' ),
+            Field::make( 'text', 'price', 'Price per persone' )
+            ->set_width( 25 )
+            ->set_attribute( 'type', 'number' ),
+            Field::make( 'text', 'url', 'URL' ),
+          )),
+        )),
+      ));
+
+
     //Для Contact
-    Container::make( 'post_meta', 2, 'Contact page settings' )
+    Container::make( 'post_meta', 'Contact page settings' )
 		  ->where( 'post_template', '=', 'templates/contact.php' )
       ->add_tab( 'Header', array(
         Field::make('text', 'cnt_section_1_title', 'Title'),
@@ -204,7 +266,7 @@ function pages_options() {
       
 
     //Для Contact
-    Container::make( 'post_meta', 2, 'Sitemap page settings' )
+    Container::make( 'post_meta', 'Sitemap page settings' )
 		  ->where( 'post_template', '=', 'templates/sitemap.php' )
       ->add_tab( 'Header', array(
         Field::make('text', 'stm_section_1_title', 'Title'),
