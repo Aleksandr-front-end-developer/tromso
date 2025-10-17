@@ -16,7 +16,9 @@
           		</div>
           	</div>
           	<div class="p-6">
+              <?php if (isset($args['tour']['title']) && $args['tour']['title']!='') { ?>
           		<h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 min-h-[3.5rem]"><?php echo $args['tour']['title']; ?></h3>
+          		<?php } ?>
           		<div class="card-description">
           			<?php echo wpautop($args['tour']['description']); ?>
           		</div>

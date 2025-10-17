@@ -53,7 +53,9 @@ $post_id = get_the_ID();
             ?>
 
 					</div>
+          <?php if (isset($block['title']) && $block['title']!='') { ?>
 					<h2 class="text-2xl font-bold text-gray-900"><?php echo $block['title']; ?></h2>
+					<?php } ?>
 				</div>
 				<ul class="space-y-3">
           <?php
@@ -88,7 +90,12 @@ $post_id = get_the_ID();
       ?>
 		</div>
 		<div class="mt-12 bg-ice-blue/10 rounded-xl p-8 border border-ice-blue/20">
-			<h2 class="text-2xl font-bold text-gray-900 mb-4"><?php echo carbon_get_post_meta($post_id, 'stm_section_3_title'); ?></h2>
+      <?php
+      $title = carbon_get_post_meta($post_id, 'stm_section_3_title');
+      if (isset($title) && $title!='') {
+      ?>
+			<h2 class="text-2xl font-bold text-gray-900 mb-4"><?php echo $title; ?></h2>
+      <?php } ?>
 			<div class="text-gray-600 mb-4 leading-relaxed"><?php echo wpautop(carbon_get_post_meta($post_id, 'stm_section_3_description')); ?></div>
 			<a class="inline-flex items-center gap-2 px-6 py-3 bg-ice-blue text-white rounded-lg font-semibold hover:bg-deep-blue transition-colors" href="<?php echo carbon_get_post_meta($post_id, 'stm_section_3_button_url'); ?>" data-discover="true">
 				<svg class="svg svg--stroke lucide lucide-mail" width="20" height="20">

@@ -18,8 +18,18 @@ $post_id = get_the_ID();
 			<div class="absolute inset-0 bg-gradient-to-b from-deep-blue/70 via-deep-blue/50 to-deep-blue/70"></div>
 		</div>
 		<div class="hero-container relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-			<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in"><?php echo carbon_get_post_meta($post_id, 'section_1_title'); ?></h1>
-			<h2 class="text-2xl sm:text-3xl text-white/90 mb-6 font-medium"><?php echo carbon_get_post_meta($post_id, 'section_1_subtitle'); ?></h2>
+      <?php 
+      $title = carbon_get_post_meta($post_id, 'section_1_title');
+      if (isset($title) && $title!='') {
+      ?>
+			<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in"><?php echo $title; ?></h1>
+      <?php } ?>
+      <?php 
+      $subtitle = carbon_get_post_meta($post_id, 'section_1_subtitle');
+      if (isset($subtitle) && $subtitle!='') {
+      ?>
+			<h2 class="text-2xl sm:text-3xl text-white/90 mb-6 font-medium"><?php echo $subtitle; ?></h2>
+      <?php } ?>
 			<div class="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed"><?php echo wpautop(carbon_get_post_meta($post_id, 'section_1_description')); ?></div>
 			<div class="flex items-center justify-center gap-2 mb-8 bg-white/10 backdrop-blur-sm px-6 py-4 rounded-full inline-flex">
 				<div class="flex">
@@ -53,7 +63,9 @@ $post_id = get_the_ID();
 				<section id="<?php echo $tour_block['anchor']; ?>" class="py-20" style="background-color:<?php echo $tour_block['background']; ?>">
 					<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 						<div class="text-center mb-16">
+              <?php if (isset($tour_block['title']) && $tour_block['title']!='') { ?>
 							<h2 class="text-4xl sm:text-5xl font-bold text-deep-blue mb-4"><?php echo $tour_block['title']; ?></h2>
+							<?php } ?>
 							<?php if ($tour_block['underline'] == 'y') { ?>
 								<div class="w-24 h-1 bg-aurora-green mx-auto"></div>
 							<?php } ?>
@@ -79,7 +91,12 @@ $post_id = get_the_ID();
 		<section id="about" class="py-20 bg-gradient-to-b from-gray-50 to-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center mb-16">
-					<h2 class="text-4xl sm:text-5xl font-bold text-deep-blue mb-6"><?php echo carbon_get_post_meta($post_id, 'section_3_title'); ?></h2>
+          <?php
+          $title = carbon_get_post_meta($post_id, 'section_3_title');
+          if (isset($title) && $title!='') {
+          ?>
+          <h2 class="text-4xl sm:text-5xl font-bold text-deep-blue mb-6"><?php echo $title; ?></h2>
+          <?php } ?>
 					<div class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"><?php echo wpautop(carbon_get_post_meta($post_id, 'section_3_description')); ?></div>
 				</div>
 				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -95,7 +112,9 @@ $post_id = get_the_ID();
 									if ($image > 0) echo wp_get_attachment_image($image, array(32, 32), false);
 									?>
 								</div>
+                <?php if (isset($card['title']) && $card['title']!='') { ?>
 								<h3 class="text-xl font-bold text-deep-blue mb-3 text-center"><?php echo $card['title']; ?></h3>
+                <?php } ?>
 								<p class="text-gray-600 text-center leading-relaxed"><?php echo wpautop($card['description']); ?></p>
 							</div>
 					<?php
@@ -109,7 +128,12 @@ $post_id = get_the_ID();
 		<section class="py-20 bg-gray-50">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center mb-12">
-					<h2 class="text-4xl sm:text-5xl font-bold text-deep-blue mb-4"><?php echo carbon_get_post_meta($post_id, 'section_4_title'); ?></h2>
+          <?php
+          $title = carbon_get_post_meta($post_id, 'section_4_title');
+          if (isset($title) && $title!='') {
+          ?>
+					<h2 class="text-4xl sm:text-5xl font-bold text-deep-blue mb-4"><?php echo $title; ?></h2>
+          <?php } ?>
 					<div class="w-24 h-1 bg-aurora-green mx-auto"></div>
 				</div>
 				<div class="grid md:grid-cols-2 gap-12 items-center">
@@ -130,7 +154,12 @@ $post_id = get_the_ID();
 		<section class="py-20 bg-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center mb-12">
-					<h2 class="text-3xl sm:text-4xl font-bold text-deep-blue mb-4"><?php echo carbon_get_post_meta($post_id, 'section_5_title'); ?></h2>
+          <?php
+          $title = carbon_get_post_meta($post_id, 'section_5_title');
+          if (isset($title) && $title!='') {
+          ?>
+					<h2 class="text-3xl sm:text-4xl font-bold text-deep-blue mb-4"><?php echo $title; ?></h2>
+          <?php } ?>
 					<div class="text-lg text-gray-600"><?php echo wpautop(carbon_get_post_meta($post_id, 'section_5_description')); ?></div>
 				</div>
 				<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -164,14 +193,19 @@ $post_id = get_the_ID();
 		<section class=" bg-white section-spollers">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div data-spollers data-one-spoller class="spollers">
+					<?php
+					$items = carbon_get_post_meta($post_id, 'section_6_items');
+					if (is_array($items)) {
+						foreach ($items as $item) {
+					?>
 					<div class="spollers__item">
-						<button type="button" data-spoller class="spollers__title text-xl text-gray-700 leading-relaxe">Do I need a tour for Arenal Volcano?</button>
-						<div class="spollers__body text-lg text-gray-600 leading-relaxed">While not mandatory, <a href="https://www.getyourguide.com/arenal-volcano-l87314/?partner_id=MME1WGW&amp;utm_medium=online_publisher&amp;deeplink_id=900f4c49-e22d-5cc3-995e-68c499c0d570&amp;page_id=6e97e4f0-98bd-576d-b56f-12f6bc86236b" target="_blank" rel="noopener" data-gyg-scraped="1760683858040">guided tours</a> are highly recommended for safety, wildlife spotting, and accessing the best viewpoints that independent travelers often miss.</div>
+						<button type="button" data-spoller class="spollers__title text-xl text-gray-700 leading-relaxe"><?php echo $item['title']; ?></button>
+						<div class="spollers__body text-lg text-gray-600 leading-relaxed"><?php echo wpautop($item['description']); ?></div>
 					</div>
-					<div class="spollers__item">
-						<button type="button" data-spoller class="spollers__title text-xl text-gray-700 leading-relaxe">Do I need a tour for Arenal Volcano?</button>
-						<div class="spollers__body text-lg text-gray-600 leading-relaxed">While not mandatory, <a href="https://www.getyourguide.com/arenal-volcano-l87314/?partner_id=MME1WGW&amp;utm_medium=online_publisher&amp;deeplink_id=900f4c49-e22d-5cc3-995e-68c499c0d570&amp;page_id=6e97e4f0-98bd-576d-b56f-12f6bc86236b" target="_blank" rel="noopener" data-gyg-scraped="1760683858040">guided tours</a> are highly recommended for safety, wildlife spotting, and accessing the best viewpoints that independent travelers often miss.</div>
-					</div>
+					<?php
+						}
+					}
+          ?>
 				</div>
 			</div>
 		</section>

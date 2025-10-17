@@ -26,7 +26,9 @@ $post_id = get_the_ID();
         ?>
 		<div class="grid md:grid-cols-2 gap-12 mb-16">
 			<div class="flex flex-col justify-center order-2 md:order-1">
+        <?php if (isset($block['title']) && $block['title']!='') { ?>
 				<h2 class="text-3xl font-bold text-gray-900 mb-4"><?php echo $block['title']; ?></h2>
+        <?php } ?>
 				<div class="text-gray-600 mb-4 leading-relaxed"><?php echo wpautop($block['description']); ?></div>
 			</div>
 			<div class="order-1 md:order-2">
@@ -48,7 +50,9 @@ $post_id = get_the_ID();
         ?>
 			</div>
 			<div class="flex flex-col justify-center">
+        <?php if (isset($block['title']) && $block['title']!='') { ?>
 				<h2 class="text-3xl font-bold text-gray-900 mb-4"><?php echo $block['title']; ?></h2>
+        <?php } ?>
 				<div class="text-gray-600 mb-4 leading-relaxed"><?php echo wpautop($block['description']); ?></div>
 			</div>
 		</div>
@@ -72,7 +76,9 @@ $post_id = get_the_ID();
           if ($image>0) echo wp_get_attachment_image( $image, array(32,32), false );
           ?>
 				</div>
+        <?php if (isset($card['title']) && $card['title']!='') { ?>
 				<h3 class="text-2xl font-bold text-gray-900 mb-2"><?php echo $card['title']; ?></h3>
+        <?php } ?>
 				<div class="text-gray-600"><?php echo wpautop($card['description']); ?></div>
 			</div>
       <?php    
@@ -81,7 +87,12 @@ $post_id = get_the_ID();
       ?>
 		</div>
 		<div class="bg-gradient-to-r from-ice-blue to-deep-blue rounded-xl p-8 md:p-12 text-white text-center">
-			<h2 class="text-3xl font-bold mb-4"><?php echo carbon_get_post_meta($post_id, 'au_section_4_title'); ?></h2>
+      <?php 
+      $title = carbon_get_post_meta($post_id, 'au_section_4_title');
+      if (isset($title) && $title!='') {
+      ?>
+			<h2 class="text-3xl font-bold mb-4"><?php echo $title; ?></h2>
+      <?php } ?>
 			<div class="grid md:grid-cols-3 gap-8 mt-8">
         <?php
         $blocks = carbon_get_post_meta($post_id, 'au_section_4_blocks');
@@ -91,7 +102,9 @@ $post_id = get_the_ID();
           {
         ?>
 				<div>
+          <?php if (isset($block['title']) && $block['title']!='') { ?>
 					<h3 class="text-xl font-bold mb-2"><?php echo $block['title']; ?></h3>
+          <?php } ?>
 					<div class="text-white/90"><?php echo wpautop($block['description']); ?></div>
 				</div>
         <?php    

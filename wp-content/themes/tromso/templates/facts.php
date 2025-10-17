@@ -24,7 +24,9 @@ $post_id = get_the_ID();
         <section id="<?php echo $tour_block['anchor']; ?>" class="py-20" style="background-color:<?php echo $tour_block['background']; ?>">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
+              <?php if (isset($tour_block['title']) && $tour_block['title']!='') { ?>
               <h2 class="text-4xl sm:text-5xl font-bold text-deep-blue mb-4"><?php echo $tour_block['title']; ?></h2>
+							<?php } ?>
               <?php if ($tour_block['underline'] == 'y') { ?>
                 <div class="w-24 h-1 bg-aurora-green mx-auto"></div>
               <?php } ?>

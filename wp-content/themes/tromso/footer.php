@@ -11,7 +11,12 @@
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
 			<div>
-				<h3 class="text-2xl font-bold mb-4"><?php echo carbon_get_theme_option('column_1_title'); ?></h3>
+        <?php
+        $title = carbon_get_theme_option('column_1_title');
+        if (isset($title) && $title!='') {
+        ?>
+				<h3 class="text-2xl font-bold mb-4"><?php echo $title; ?></h3>
+        <?php } ?>
 				<div class="text-white/80 mb-4"><?php echo wpautop(carbon_get_theme_option('footer_description')); ?></div>
 				<div class="flex gap-4">
 					<?php
@@ -31,7 +36,12 @@
 				</div>
 			</div>
 			<div>
+        <?php
+        $title = carbon_get_theme_option('column_2_title');
+        if (isset($title) && $title!='') {
+        ?>
 				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_2_title'); ?></h4>
+        <?php } ?>
 				<div class="space-y-3 text-white/80">
 					<div class="flex items-start gap-2">
 						<svg class="svg svg--stroke lucide lucide-map-pin mt-1 flex-shrink-0" width="20" height="20">
@@ -58,7 +68,12 @@
 				</div>
 			</div>
 			<div>
+        <?php
+        $title = carbon_get_theme_option('column_3_title');
+        if (isset($title) && $title!='') {
+        ?>
 				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_3_title'); ?></h4>
+        <?php } ?>
 
 				<?php
 				wp_nav_menu([
@@ -72,7 +87,12 @@
 
 			</div>
 			<div class="footer-column footer-column--last">
+        <?php
+        $title = carbon_get_theme_option('column_4_title');
+        if (isset($title) && $title!='') {
+        ?>
 				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_4_title'); ?></h4>
+        <?php } ?>
 				<?php echo do_shortcode(carbon_get_theme_option('column_4_contact_form')); ?>
 			</div>
 		</div>

@@ -120,6 +120,14 @@ function pages_options() {
           ->set_width( 33 ),
           Field::make( 'rich_text', 'description', 'Description' ),
         )),
+      ))
+      ->add_tab( 'Accordion', array(
+        Field::make( 'complex', 'section_6_items', 'Accordion strings' )
+        ->set_layout( 'tabbed-horizontal' )
+        ->add_fields( array(
+          Field::make( 'text', 'title', 'Title' ),
+          Field::make( 'rich_text', 'description', 'Description' ),
+        )),
       ));
 
 
