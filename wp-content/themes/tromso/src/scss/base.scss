@@ -131,6 +131,18 @@ form {
 	}
 }
 
+.text-center.mb-16:has(h2:empty, .text-xl:empty) {
+	display: none;
+}
+
+.text-center.mb-16:has(h2.text-4xl:not(:empty)) {
+	display: block;
+}
+
+div.text-center.mb-16:has(.text-xl:not(:empty)) {
+	display: block;
+}
+
 /*
 .select {
 	position: relative;

@@ -49,7 +49,15 @@ header.menu-open .mobile-menu {
 	}
 }
 
-.custom-logo {
-  width: 172px !important;
-  height: auto !important;
+
+.custom-logo-link {
+	height: rem(60);
+	max-width: rem(172);
+
+}
+
+img.custom-logo {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
 }
