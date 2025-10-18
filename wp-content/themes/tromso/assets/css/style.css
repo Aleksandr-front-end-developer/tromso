@@ -2452,7 +2452,6 @@ img.custom-logo {
 
 .card__wrapper-info {
   margin-top: auto;
-  min-height: 4.5rem;
 }
 
 .why__texts p {
@@ -2550,6 +2549,12 @@ center iframe {
 
   .md\:p-12 {
     padding: 3rem;
+  }
+}
+
+@media (min-width: 64em) {
+  .card__wrapper-info {
+    min-height: 4.5rem;
   }
 }
 

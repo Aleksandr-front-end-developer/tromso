@@ -188,7 +188,10 @@
 
 .card__wrapper-info {
 	margin-top: auto;
-	min-height: rem(72);
+
+	@media (min-width:em(1024)) {
+		min-height: rem(72);
+	}
 }
 
 .why__texts {
