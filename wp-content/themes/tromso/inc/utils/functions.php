@@ -42,3 +42,18 @@ function get_rating_stars($rating, $size = 20) {
     
     return $output;
 }
+
+function mb_trim( $str ) {
+    return mb_ereg_replace(
+        '^[[:space:]]*([\s\S]*?)[[:space:]]*$', '\1', $str );
+}
+
+function check_cf($data) {
+
+  return (!is_null($data) && $data!='');
+}
+
+function check_cf_complex($data) {
+
+  return (is_array($data) && count($data)>0);
+}

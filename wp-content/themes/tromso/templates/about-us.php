@@ -12,7 +12,13 @@ $post_id = get_the_ID();
 ?>
 <main id="main" class="main">
 
-	<?php get_template_part('template-parts/page', 'header', array('title'=>carbon_get_post_meta($post_id, 'au_section_1_title'), 'description'=>carbon_get_post_meta($post_id, 'au_section_1_description')));	  ?>
+  <?php
+	$title = carbon_get_post_meta($post_id, 'au_section_1_title');
+  $description = carbon_get_post_meta($post_id, 'au_section_1_description');
+  if (check_cf($title) || check_cf($description)) {
+    get_template_part('template-parts/page', 'header', array('title'=>$title, 'description'=>$description));
+  }
+  ?>
 
 	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <?php
@@ -61,13 +67,15 @@ $post_id = get_the_ID();
       }
     }
     ?>
+    
+    <?php
+    $cards = carbon_get_post_meta($post_id, 'au_section_3_cards');
+    if (check_cf_complex($cards)) {
+    ?>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
       <?php
-      $cards = carbon_get_post_meta($post_id, 'au_section_3_cards');
-      if (is_array($cards))
+      foreach ($cards as $card)
       {
-        foreach ($cards as $card)
-        {
       ?>
 			<div class="text-center p-6 bg-white rounded-xl shadow-md">
 				<div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: <?php echo $card['image_background']; ?>;">
@@ -82,20 +90,24 @@ $post_id = get_the_ID();
 				<div class="text-gray-600"><?php echo wpautop($card['description']); ?></div>
 			</div>
       <?php    
-        }
       }
       ?>
 		</div>
+    <?php } ?>
+    
+    <?php
+    $title = carbon_get_post_meta($post_id, 'au_section_4_title');
+    $blocks = carbon_get_post_meta($post_id, 'au_section_4_blocks');
+    if (check_cf($title) || check_cf_complex($blocks)) {
+    ?>
 		<div class="bg-gradient-to-r from-ice-blue to-deep-blue rounded-xl p-8 md:p-12 text-white text-center">
       <?php 
-      $title = carbon_get_post_meta($post_id, 'au_section_4_title');
       if (isset($title) && $title!='') {
       ?>
 			<h2 class="text-3xl font-bold mb-4"><?php echo $title; ?></h2>
       <?php } ?>
 			<div class="grid md:grid-cols-3 gap-8 mt-8">
         <?php
-        $blocks = carbon_get_post_meta($post_id, 'au_section_4_blocks');
         if (is_array($blocks))
         {
           foreach ($blocks as $block)
@@ -113,6 +125,8 @@ $post_id = get_the_ID();
         ?>
 			</div>
 		</div>
+    <?php } ?>
+    
 	</div>
 </main>
 <?php

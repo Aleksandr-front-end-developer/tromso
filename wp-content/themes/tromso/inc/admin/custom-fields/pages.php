@@ -180,7 +180,7 @@ function pages_options() {
       ));
 
 
-    //Для About (new)
+    //Для About (new) / Facts
     Container::make( 'post_meta', 'About Us (new) / Facts page settings' )
 		  ->where( 'post_template', 'IN', array('templates/about-new.php', 'templates/facts.php') )
       ->add_tab( 'Header', array(
@@ -273,7 +273,7 @@ function pages_options() {
       ));
       
 
-    //Для Contact
+    //Для Sitemap
     Container::make( 'post_meta', 'Sitemap page settings' )
 		  ->where( 'post_template', '=', 'templates/sitemap.php' )
       ->add_tab( 'Header', array(

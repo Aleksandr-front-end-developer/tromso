@@ -12,7 +12,13 @@ $post_id = get_the_ID();
 ?>
 <main id="main" class="main">
 
-	<?php get_template_part('template-parts/page', 'header', array('title'=>carbon_get_post_meta($post_id, 'cnt_section_1_title'), 'description'=>carbon_get_post_meta($post_id, 'cnt_section_1_description')));	  ?>
+  <?php
+	$title = carbon_get_post_meta($post_id, 'cnt_section_1_title');
+  $description = carbon_get_post_meta($post_id, 'cnt_section_1_description');
+  if (check_cf($title) || check_cf($description)) {
+    get_template_part('template-parts/page', 'header', array('title'=>$title, 'description'=>$description));
+  }
+  ?>
 
 	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 		<div class="grid md:grid-cols-2 gap-12">
