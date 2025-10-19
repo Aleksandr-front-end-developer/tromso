@@ -2468,6 +2468,10 @@ img.custom-logo {
   text-decoration: underline;
 }
 
+iframe {
+  max-width: 100% !important;
+}
+
 center iframe {
   margin-left: auto;
   margin-right: auto;
