@@ -151,10 +151,27 @@ $post_id = get_the_ID();
 	$content = mb_trim(get_the_content());
 	if ($content != '') {
 	?>
-		<section class="tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 py-16 pt-4  mx-auto"><?php echo $content; ?></section>
+		<section class="tour-content__content tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 py-16 pt-4  mx-auto">
+			<div>
+				<?php echo $content; ?>
+			</div>
+		</section>
 	<?php } ?>
 
-
+	<section class="tour-reviews tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 py-16 pt-4  mx-auto">
+		<div class="tour-reviews__wrapper">
+			<h2 class="content-block__title">Reviews</h2>
+			<div class="stars flex items-center justify-center gap-2 mb-8 bg-white/10 backdrop-blur-sm  rounded-full inline-flex">
+				<div class="flex">
+					<?php
+					echo get_rating_stars(4.5);
+					?>
+				</div>
+				<span class="tour-reviews__number font-semibold text-lg">4.5</span>
+				<a href="" class="ml-2 text-white/90 hover:text-aurora-green transition-colors underline font-medium">Read more reviews</a>
+			</div>
+		</div>
+	</section>
 
 </main>
 <?php

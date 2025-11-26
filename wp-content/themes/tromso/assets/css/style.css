@@ -2724,6 +2724,18 @@ center iframe {
   height: 2.25rem;
 }
 
+.tour-reviews > *,
+tour-content__content > * {
+  max-width: 50rem;
+}
+
+.tour-reviews__number {
+  font-size: 32px;
+  line-height: 1;
+  order: -1;
+  margin-right: 0.625rem;
+}
+
 @media (min-width: 47.99875em) {
   .tour-hero__wrapper {
     display: flex;
@@ -2747,6 +2759,16 @@ center iframe {
 
   .content-block__wrapper > * {
     flex-basis: 50%;
+  }
+
+  .tour-reviews__wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .tour-reviews__wrapper > *,
+  .tour-reviews__wrapper h2 {
+    margin: 0;
   }
 }
 

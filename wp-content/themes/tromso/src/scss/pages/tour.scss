@@ -181,3 +181,33 @@
 		}
 	}
 }
+
+.tour-reviews,
+tour-content__content {
+	>* {
+
+		max-width: 50rem;
+	}
+}
+
+.tour-reviews__wrapper {
+	@media (min-width:$mobile) {
+		display: flex;
+		// align-items: baseline;
+		gap: rem(32);
+
+		>*,
+		h2 {
+			margin: 0;
+		}
+	}
+}
+
+.tour-reviews__number {
+	font-size: 32px;
+	line-height: 1;
+	order: -1;
+	margin-right: rem(10);
+}
+
+.tour-content__container {}
