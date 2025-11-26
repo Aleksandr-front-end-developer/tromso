@@ -241,12 +241,18 @@ $post_id = get_the_ID();
 		</section>
 	<?php } ?>
 
+	<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+		<!-- Plugin Testimonial Slider and Showcase -->
+		<?php echo do_shortcode('[rt-testimonial id="255" title="home"]') ?>
+	</section>
+
+
 	<?php
 	$content = mb_trim(get_the_content());
 	if ($content != '') {
 	?>
-		<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><?php echo $content; ?></і>
-		<?php } ?>
+		<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><?php echo $content; ?></section>
+	<?php } ?>
 
 </main>
 <?php

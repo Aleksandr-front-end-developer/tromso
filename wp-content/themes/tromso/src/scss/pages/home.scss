@@ -151,6 +151,10 @@
 .card-description {
 	margin-bottom: rem(12);
 
+	.wp-block-list {
+		margin-bottom: 0;
+	}
+
 	ul {
 		margin-top: rem(8);
 		padding-left: rem(24);
@@ -218,4 +222,125 @@ center iframe {
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
+}
+
+
+.content {
+	table {
+		border-collapse: collapse;
+		margin-top: rem(32);
+		border-radius: rem(10);
+		border: rem(1) solid transparent;
+		overflow: hidden;
+		background: transparent;
+		position: relative;
+		display: inline-block;
+		--bgcolor: #f8fafc;
+		--fontcolor: #000;
+		overflow-x: auto;
+
+		&.article__block--table table {
+			margin-bottom: rem(8);
+		}
+
+		img {
+			display: inline-block;
+		}
+	}
+
+	thead {
+		tr th {
+			background-color: #1d365c;
+			padding: rem(18) rem(24);
+			color: #fff;
+			font-weight: 600;
+			font-size: rem(14);
+			line-height: 1.25;
+
+			&:first-child {
+				border-radius: rem(10) 0 0 0;
+			}
+
+			&:last-child {
+				border-radius: 0 rem(10) 0 0;
+			}
+		}
+	}
+
+	tbody>tr:first-child td {
+		background-color: #1d365c;
+		padding: rem(18) rem(24);
+		color: #fff;
+		font-weight: 600;
+		font-size: rem(14);
+		line-height: 1.25;
+
+		&:first-child {
+			border-radius: rem(10) 0 0 0;
+		}
+
+		&:last-child {
+			border-radius: 0 rem(10) 0 0;
+		}
+	}
+
+	thead+tbody>tr:first-child td {
+		background-color: inherit;
+		padding: rem(24) rem(24);
+		font-weight: 400;
+		font-size: rem(14);
+		line-height: 1.25;
+		color: var(--fontcolor);
+	}
+
+	tbody {
+		font-weight: 400;
+		font-size: rem(14);
+		line-height: 1.25;
+		color: var(--fontcolor);
+
+		tr:nth-last-child(2n + 1) {
+			background-color: #ededed;
+		}
+
+		tr:nth-last-child(2n + 2) {
+			background-color: #f8fafc;
+		}
+
+		td {
+			padding: rem(24) rem(24);
+		}
+	}
+
+	table {
+		td>* {
+			display: block;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		td>*:not(:last-child) {
+			margin: 0 0 rem(10) 0;
+		}
+
+		td>*:empty {
+			min-height: rem(5);
+		}
+
+		td>ul>li,
+		td>ol>li {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		td>ul>li:not(:last-child),
+		td>ol>li:not(:last-child) {
+			margin-bottom: rem(10);
+		}
+	}
+}
+
+.button-read {
+	max-width: max-content;
+	margin-bottom: rem(24);
 }

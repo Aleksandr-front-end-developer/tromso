@@ -1,9 +1,13 @@
-          <a href="<?php echo $args['tour']['url']; ?>" class="card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group flex flex-col" target="_blank">
+          <div class="card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group flex flex-col">
           	<div class="relative overflow-hidden h-64">
-          		<?php
-							$image = intval($args['tour']['image']);
-							if ($image > 0) echo wp_get_attachment_image($image, 'full', false, array('class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'));
-							?>
+
+          		<a href="<?php echo $args['tour']['url']; ?>" target="_blank">
+          			<?php
+								$image = intval($args['tour']['image']);
+								if ($image > 0) echo wp_get_attachment_image($image, 'full', false, array('class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'));
+								?>
+          		</a>
+
           		<div class="absolute top-4 left-4 flex gap-2">
           			<?php if ($args['tour']['best_seller'] == 'yes') { ?>
           				<span class="bg-aurora-green text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">BEST SELLER</span>
@@ -22,6 +26,10 @@
           		<div class="card-description">
           			<?php echo wpautop($args['tour']['description']); ?>
           		</div>
+
+          		<a href="/" class="mb-3 px-3 py-1 rounded-lg  transition-all duration-300 transform hover:scale-105 active:scale-95 bg-aurora-green text-white hover:bg-green-600 shadow-lg hover:shadow-xl button-read">Read more</a>
+
+
           		<div class="card__wrapper-info">
           			<div class=" card__stars">
           				<div class="flex items-center gap-1">
@@ -49,10 +57,10 @@
           				<span class="text-3xl font-bold text-deep-blue"><?php echo $args['currency'] ?><span class="card__value"><?php echo $args['tour']['price']; ?></span></span>
           				<span class="text-gray-500 text-sm ml-1">per person</span>
           			</div>
-          			<button
+          			<a href="<?php echo $args['tour']['url']; ?>" target="_blank"
           				class="px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 bg-aurora-green text-white hover:bg-green-600 shadow-lg hover:shadow-xl px-6 py-2 card__button">
-          				LEARN MORE
-          			</button>
+          				BOOK NOW
+          			</a>
           		</div>
           	</div>
-          </a>
+          </div>
