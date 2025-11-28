@@ -11,6 +11,8 @@ function pages_options() {
     Container::make( 'post_meta', 'Main page settings' )
 		  ->where( 'post_template', '=', 'templates/main-page.php' )
       ->add_tab( 'Header', array(
+        Field::make('checkbox', 'main_do_not_show1', 'Do not show?')
+        ->set_option_value( 'yes' ),
         Field::make('text', 'section_1_title', 'Title')
         ->set_width( 40 ),
         Field::make('text', 'section_1_subtitle', 'Subtitle')
@@ -32,6 +34,8 @@ function pages_options() {
         ->set_width( 25 ),
       ))
       ->add_tab( 'Tour blocks', array(
+        Field::make('checkbox', 'main_do_not_show2', 'Do not show?')
+        ->set_option_value( 'yes' ),
         Field::make('text', 'currency_symbol', 'Сurrency symbol'),
         Field::make( 'complex', 'main_page_tours', 'Tours blocks' )
         ->set_layout( 'tabbed-vertical' )
@@ -50,7 +54,7 @@ function pages_options() {
           ->set_width( 26 )
           ->set_default_value( '' ),
           Field::make( 'rich_text', 'description', 'Description' ),
-          Field::make( 'complex', 'tours', 'Tour cards' )
+          Field::make( 'complex', 'tours', 'Tour cards old' )
           ->set_layout( 'tabbed-horizontal' )
           ->add_fields( array(
             Field::make( 'checkbox', 'best_seller', 'Best seller' )
@@ -81,9 +85,18 @@ function pages_options() {
             ->set_attribute( 'type', 'number' ),
             Field::make( 'text', 'url', 'URL' ),
           )),
+          Field::make( 'association', 'tours_new', 'Tours' )
+          ->set_types( array(
+              array(
+                  'type'      => 'post',
+                  'post_type' => 'tours',
+              )
+          ) ),
         )),
       ))
       ->add_tab( 'Text block with cards', array(
+        Field::make('checkbox', 'main_do_not_show3', 'Do not show?')
+        ->set_option_value( 'yes' ),
         Field::make('text', 'section_3_title', 'Title'),
         Field::make('rich_text', 'section_3_description', 'Description'),
         Field::make( 'complex', 'section_3_cards', 'Cards' )
@@ -99,6 +112,8 @@ function pages_options() {
         )),
       ))
       ->add_tab( 'Text block with image', array(
+        Field::make('checkbox', 'main_do_not_show4', 'Do not show?')
+        ->set_option_value( 'yes' ),
         Field::make('text', 'section_4_title', 'Title')
         ->set_width( 50 ),
         Field::make( 'image', 'section_4_image', 'Image' )
@@ -107,6 +122,8 @@ function pages_options() {
         Field::make('rich_text', 'section_4_description2', 'Description, small font'),
       ))
       ->add_tab( 'Text block with cards 2', array(
+        Field::make('checkbox', 'main_do_not_show5', 'Do not show?')
+        ->set_option_value( 'yes' ),
         Field::make('text', 'section_5_title', 'Title'),
         Field::make('rich_text', 'section_5_description', 'Description'),
         Field::make( 'complex', 'section_5_cards', 'Cards' )
@@ -122,12 +139,17 @@ function pages_options() {
         )),
       ))
       ->add_tab( 'Accordion', array(
+        Field::make('checkbox', 'main_do_not_show6', 'Do not show?')
+        ->set_option_value( 'yes' ),
         Field::make( 'complex', 'section_6_items', 'Accordion strings' )
         ->set_layout( 'tabbed-horizontal' )
         ->add_fields( array(
           Field::make( 'text', 'title', 'Title' ),
           Field::make( 'rich_text', 'description', 'Description' ),
         )),
+      ))
+      ->add_tab( 'Reviews block', array(
+        Field::make('text', 'main_reviews_shortcode', 'Reviews block shortcode')
       ));
 
 
@@ -188,6 +210,8 @@ function pages_options() {
         Field::make('rich_text', 'aun_section_1_description', 'Description'),
       ))
       ->add_tab( 'Tour blocks', array(
+        Field::make('checkbox', 'aun_do_not_show_tours', 'Do not show?')
+        ->set_option_value( 'yes' ),
         Field::make('text', 'currency_symbol', 'Сurrency symbol'),
         Field::make( 'complex', 'aun_tours', 'Tours blocks' )
         ->set_layout( 'tabbed-vertical' )
@@ -206,13 +230,13 @@ function pages_options() {
           ->set_width( 26 )
           ->set_default_value( '' ),
           Field::make( 'rich_text', 'description', 'Description' ),
-          Field::make( 'complex', 'tours', 'Tour cards' )
+          Field::make( 'complex', 'tours', 'Tour cards old' )
           ->set_layout( 'tabbed-horizontal' )
           ->add_fields( array(
             Field::make( 'checkbox', 'best_seller', 'Best seller' )
             ->set_width( 15 )
             ->set_option_value( 'yes' ),
-            Field::make( 'checkbox', 'top_rated', 'Top_rated' )
+            Field::make( 'checkbox', 'top_rated', 'Top rated' )
             ->set_width( 15 )
             ->set_option_value( 'yes' ),
             Field::make('text', 'title', 'Title')
@@ -237,6 +261,13 @@ function pages_options() {
             ->set_attribute( 'type', 'number' ),
             Field::make( 'text', 'url', 'URL' ),
           )),
+          Field::make( 'association', 'tours_new', 'Tours' )
+          ->set_types( array(
+              array(
+                  'type'      => 'post',
+                  'post_type' => 'tours',
+              )
+          ) ),
         )),
       ));
 

@@ -22,11 +22,11 @@ $post_id = get_the_ID();
 
 	<?php
 	$tour_blocks = carbon_get_post_meta($post_id, 'aun_tours');
-	if (check_cf_complex($tour_blocks)) {
+	$do_not_show = carbon_get_post_meta($post_id, 'aun_do_not_show_tours');
+	if (!$do_not_show && check_cf_complex($tour_blocks)) {
 	?>
 		<div id="tours_block">
 			<?php
-			$currency = carbon_get_post_meta($post_id, 'currency_symbol');
 			foreach ($tour_blocks as $tour_block) {
 			?>
 				<section id="<?php echo $tour_block['anchor']; ?>" class="py-20" style="background-color:<?php echo $tour_block['background']; ?>">
@@ -42,9 +42,9 @@ $post_id = get_the_ID();
 						</div>
 						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 							<?php
-							if (is_array($tour_block['tours'])) {
-								foreach ($tour_block['tours'] as $tour) {
-									get_template_part('template-parts/tour-card', null, array('tour' => $tour, 'currency' => $currency));
+							if (is_array($tour_block['tours_new'])) {
+								foreach ($tour_block['tours_new'] as $tour) {
+									get_template_part('template-parts/tour-card', null, array('tour' => $tour));
 								}
 							}
 							?>

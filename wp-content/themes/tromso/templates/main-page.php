@@ -20,7 +20,8 @@ $post_id = get_the_ID();
 	$rating = carbon_get_post_meta($post_id, 'section_1_rating');
 	$link_text = carbon_get_post_meta($post_id, 'section_1_link_text');
 	$button_text = carbon_get_post_meta($post_id, 'section_1_button_text');
-	if ($image != 0 || check_cf($title) || check_cf($subtitle) || check_cf($description) || check_cf($rating) || check_cf($link_text) || check_cf($button_text)) {
+	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show1');
+	if (!$do_not_show && ($image != 0 || check_cf($title) || check_cf($subtitle) || check_cf($description) || check_cf($rating) || check_cf($link_text) || check_cf($button_text))) {
 	?>
 		<section class="hero relative h-screen flex items-center justify-center overflow-hidden">
 			<div
@@ -65,12 +66,13 @@ $post_id = get_the_ID();
 	<?php } ?>
 
 	<?php
-	$tour_blocks = carbon_get_post_meta($post_id, 'main_page_tours');
-	if (check_cf_complex($tour_blocks)) {
+	$tour_blocks = carbon_get_post_meta($post_id, 'main_page_tours'); 
+  //print_r($tour_blocks);
+	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show2');
+	if (!$do_not_show && check_cf_complex($tour_blocks)) {
 	?>
 		<div id="tours_block">
 			<?php
-			$currency = carbon_get_post_meta($post_id, 'currency_symbol');
 			foreach ($tour_blocks as $tour_block) {
 			?>
 				<section id="<?php echo $tour_block['anchor']; ?>" class="py-20" style="background-color:<?php echo $tour_block['background']; ?>">
@@ -86,9 +88,9 @@ $post_id = get_the_ID();
 						</div>
 						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 							<?php
-							if (is_array($tour_block['tours'])) {
-								foreach ($tour_block['tours'] as $tour) {
-									get_template_part('template-parts/tour-card', null, array('tour' => $tour, 'currency' => $currency));
+							if (is_array($tour_block['tours_new'])) {
+								foreach ($tour_block['tours_new'] as $tour) {
+									get_template_part('template-parts/tour-card', null, array('tour' => $tour));
 								}
 							}
 							?>
@@ -105,7 +107,8 @@ $post_id = get_the_ID();
 	$title = carbon_get_post_meta($post_id, 'section_3_title');
 	$description = carbon_get_post_meta($post_id, 'section_3_description');
 	$cards = carbon_get_post_meta($post_id, 'section_3_cards');
-	if (check_cf($title) || check_cf($description) || check_cf_complex($cards)) {
+	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show3');
+	if (!$do_not_show && (check_cf($title) || check_cf($description) || check_cf_complex($cards))) {
 	?>
 		<section id="about" class="py-20 bg-gradient-to-b from-gray-50 to-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -148,7 +151,8 @@ $post_id = get_the_ID();
 	$image = intval(carbon_get_post_meta($post_id, 'section_4_image'));
 	$description1 = carbon_get_post_meta($post_id, 'section_4_description1');
 	$description2 = carbon_get_post_meta($post_id, 'section_4_description2');
-	if ($image != 0 || check_cf($title) || check_cf($description1) || check_cf($description2)) {
+	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show4');
+	if (!$do_not_show && ($image != 0 || check_cf($title) || check_cf($description1) || check_cf($description2))) {
 	?>
 		<section class="py-20 bg-gray-50 why">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -179,7 +183,8 @@ $post_id = get_the_ID();
 	$title = carbon_get_post_meta($post_id, 'section_5_title');
 	$description = carbon_get_post_meta($post_id, 'section_5_description');
 	$cards = carbon_get_post_meta($post_id, 'section_5_cards');
-	if (check_cf($title) || check_cf($description) || check_cf_complex($cards)) {
+	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show5');
+	if (!$do_not_show && (check_cf($title) || check_cf($description) || check_cf_complex($cards))) {
 	?>
 		<section class="py-20 bg-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -221,7 +226,8 @@ $post_id = get_the_ID();
 	<?php /* section spollers  */ ?>
 	<?php
 	$items = carbon_get_post_meta($post_id, 'section_6_items');
-	if (check_cf_complex($items)) {
+	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show6');
+	if (!$do_not_show && check_cf_complex($items)) {
 	?>
 		<section class=" bg-white section-spollers">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -241,10 +247,14 @@ $post_id = get_the_ID();
 		</section>
 	<?php } ?>
 
+	<?php
+	$shortcode = carbon_get_post_meta($post_id, 'main_reviews_shortcode');
+	if ($shortcode!='') {
+	?>
 	<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-		<!-- Plugin Testimonial Slider and Showcase -->
-		<?php echo do_shortcode('[rt-testimonial id="255" title="home"]') ?>
+		<?php echo do_shortcode($shortcode) ?>
 	</section>
+	<?php } ?>
 
 
 	<?php
