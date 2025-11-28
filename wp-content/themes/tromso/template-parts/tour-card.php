@@ -9,7 +9,7 @@ if (!is_null($tour))
           <div class="card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group flex flex-col">
           	<div class="relative overflow-hidden h-64">
 
-          		<a href="<?php echo $post_page; ?>" target="_blank">
+          		<a href="<?php echo $post_page; ?>">
           			<?php
 								echo get_the_post_thumbnail($tour->ID, 'full', false, array('class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'));
 								?>
