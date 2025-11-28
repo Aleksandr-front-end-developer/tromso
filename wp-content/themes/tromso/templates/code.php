@@ -1,12 +1,6 @@
 <?php
 
-/**
- * Template Name: Code
- *
- * Front page php tempate
- */
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php';
+/*require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php';
 
 //Получаем ID админа
 $user_id = 0;
@@ -198,5 +192,5 @@ foreach ($templates as $template)
   }
 }
 
-flush_rewrite_rules();
+flush_rewrite_rules();*/
 ?>

@@ -54,7 +54,7 @@ function pages_options() {
           ->set_width( 26 )
           ->set_default_value( '' ),
           Field::make( 'rich_text', 'description', 'Description' ),
-          Field::make( 'complex', 'tours', 'Tour cards old' )
+          /*Field::make( 'complex', 'tours', 'Tour cards old' )
           ->set_layout( 'tabbed-horizontal' )
           ->add_fields( array(
             Field::make( 'checkbox', 'best_seller', 'Best seller' )
@@ -84,7 +84,7 @@ function pages_options() {
             ->set_width( 25 )
             ->set_attribute( 'type', 'number' ),
             Field::make( 'text', 'url', 'URL' ),
-          )),
+          )),*/
           Field::make( 'association', 'tours_new', 'Tours' )
           ->set_types( array(
               array(
@@ -230,7 +230,7 @@ function pages_options() {
           ->set_width( 26 )
           ->set_default_value( '' ),
           Field::make( 'rich_text', 'description', 'Description' ),
-          Field::make( 'complex', 'tours', 'Tour cards old' )
+          /*Field::make( 'complex', 'tours', 'Tour cards old' )
           ->set_layout( 'tabbed-horizontal' )
           ->add_fields( array(
             Field::make( 'checkbox', 'best_seller', 'Best seller' )
@@ -260,7 +260,7 @@ function pages_options() {
             ->set_width( 25 )
             ->set_attribute( 'type', 'number' ),
             Field::make( 'text', 'url', 'URL' ),
-          )),
+          )),*/
           Field::make( 'association', 'tours_new', 'Tours' )
           ->set_types( array(
               array(
