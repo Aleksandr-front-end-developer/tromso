@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Tour
+ * Template Name1: Tour
  *
  * Front page php tempate
  */
