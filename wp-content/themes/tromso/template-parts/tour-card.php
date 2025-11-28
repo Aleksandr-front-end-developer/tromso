@@ -33,12 +33,7 @@ if (!is_null($tour))
           		<div class="card-description">
           			<?php echo wpautop($tour->post_content); ?>
           		</div>
-
-<<<<<<< HEAD
-          		<a href="<?php echo $post_page; ?>" class="mb-3 px-3 py-1 rounded-lg  transition-all duration-300 transform hover:scale-105 active:scale-95 bg-aurora-green text-white hover:bg-green-600 shadow-lg hover:shadow-xl button-read">Read more</a>
-=======
-          		<a href="/" class=" button-read">Read more</a>
->>>>>>> a72b63e7f370c25a285951d089b8f1b68f9d42a2
+          		<a href="<?php echo $post_page; ?>" class=" button-read">Read more</a>
 
 
           		<div class="card__wrapper-info">
