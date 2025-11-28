@@ -38,7 +38,8 @@ foreach ($need_terms as $new_term)
 
 $best_seller = get_term_by( 'name', 'Best seller', 'tours-category' );
 $top_rated = get_term_by( 'name', 'Top rated', 'tours-category' );
-
+print_r($best_seller);
+print_r($top_rated);
 
 $pages = get_posts([
     'post_type'  => 'page',
@@ -78,6 +79,9 @@ foreach ($pages as $page)
         if ($exist===false)
         {
           $tax_input = array();
+print_r($tour['best_seller'].PHP_EOL);
+print_r($tour['best_seller'].PHP_EOL);
+print_r(PHP_EOL);
           if ($tour['best_seller']) $tax_input[] = $best_seller->term_id;
           if ($tour['top_rated']) $tax_input[] = $top_rated->term_id;
           
@@ -104,6 +108,7 @@ foreach ($pages as $page)
           );
           print_r($args);
           $post_id = wp_insert_post($args);
+          wp_set_object_terms( $post_id, $tax_input, 'tours-category' );
           
         } else $post_id = $exist;
         
