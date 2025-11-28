@@ -2608,7 +2608,7 @@ center iframe {
   padding-top: 9.375rem;
 }
 
-.page-template-tour header {
+.single-tours header {
   background: rgba(13, 25, 54, 0.95);
 }
 
@@ -2751,7 +2751,7 @@ tour-content__content > * {
   }
 
   .tour-hero__image {
-    flex: 1 0 50%;
+    flex: 0 1 50%;
   }
 
   .tour-hero__title {
