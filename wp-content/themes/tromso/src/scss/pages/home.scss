@@ -343,4 +343,12 @@ center iframe {
 .button-read {
 	max-width: max-content;
 	margin-bottom: rem(24);
+	--tw-text-opacity: 1;
+	color: rgb(34 197 94 / var(--tw-text-opacity, 1));
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
+
 }

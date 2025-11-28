@@ -2595,6 +2595,13 @@ center iframe {
   max-width: -moz-max-content;
   max-width: max-content;
   margin-bottom: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94/var(--tw-text-opacity, 1));
+}
+
+.button-read:hover,
+.button-read:focus {
+  text-decoration: underline;
 }
 
 .tour-hero {

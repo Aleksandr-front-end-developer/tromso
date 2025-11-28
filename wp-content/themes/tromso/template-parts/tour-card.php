@@ -27,7 +27,7 @@
           			<?php echo wpautop($args['tour']['description']); ?>
           		</div>
 
-          		<a href="/" class="mb-3 px-3 py-1 rounded-lg  transition-all duration-300 transform hover:scale-105 active:scale-95 bg-aurora-green text-white hover:bg-green-600 shadow-lg hover:shadow-xl button-read">Read more</a>
+          		<a href="/" class=" button-read">Read more</a>
 
 
           		<div class="card__wrapper-info">
