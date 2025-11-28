@@ -197,4 +197,6 @@ foreach ($templates as $template)
     carbon_set_post_meta( $page->ID, 'aun_do_not_show_tours', 'yes' );      
   }
 }
+
+flush_rewrite_rules();
 ?>
