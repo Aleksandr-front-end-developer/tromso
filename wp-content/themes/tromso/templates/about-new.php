@@ -12,6 +12,8 @@ $post_id = get_the_ID();
 ?>
 <main id="main" class="main">
 
+
+
 	<?php
 	$title = carbon_get_post_meta($post_id, 'aun_section_1_title');
 	$description = carbon_get_post_meta($post_id, 'aun_section_1_description');
@@ -19,6 +21,7 @@ $post_id = get_the_ID();
 		get_template_part('template-parts/page', 'header', array('title' => $title, 'description' => $description));
 	}
 	?>
+
 
 	<?php
 	$content = mb_trim(get_the_content());
