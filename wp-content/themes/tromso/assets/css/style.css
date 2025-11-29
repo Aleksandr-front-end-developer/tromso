@@ -2770,6 +2770,10 @@ tour-content__content > * {
     gap: 1.5rem;
   }
 
+  .tour-hero__texts {
+    flex: 0 1 50%;
+  }
+
   .tour-hero__image {
     flex: 0 1 50%;
   }

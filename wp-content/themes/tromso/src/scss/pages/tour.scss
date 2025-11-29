@@ -50,12 +50,19 @@
 	}
 }
 
+.tour-hero__texts {
+	@media (min-width:$mobile) {
+		flex: 0 1 50%;
+	}
+}
+
 .tour-hero__image {
 	margin-bottom: rem(20);
 
 	@media (min-width:$mobile) {
 		flex: 0 1 50%;
 	}
+
 
 
 	img {
