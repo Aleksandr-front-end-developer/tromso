@@ -2490,10 +2490,11 @@ center iframe {
   overflow: hidden;
   background: transparent;
   position: relative;
-  display: inline-block;
   --bgcolor: #f8fafc;
   --fontcolor: #000;
+  display: block;
   overflow-x: auto;
+  max-width: calc(100vw - 2rem);
 }
 
 .content table.article__block--table table {
@@ -2912,7 +2913,7 @@ tour-content__content > * {
     line-height: 1.2;
   }
 
-  .breadcrumbs {
+  .single-tours .breadcrumbs {
     padding-top: 7.5rem;
   }
 }

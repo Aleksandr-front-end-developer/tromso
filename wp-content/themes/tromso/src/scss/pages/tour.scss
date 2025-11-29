@@ -16,9 +16,7 @@
 		}
 	}
 
-	@media (max-width:$mobile) {
-		padding-top: rem(120);
-	}
+
 
 	svg {
 		display: inline-block;
@@ -32,6 +30,10 @@
 .single-tours .breadcrumbs {
 	padding-top: rem(120);
 	margin-bottom: rem(40);
+
+	@media (max-width:$mobile) {
+		padding-top: rem(120);
+	}
 }
 
 .single-tours header {

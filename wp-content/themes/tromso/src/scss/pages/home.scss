@@ -234,10 +234,12 @@ center iframe {
 		overflow: hidden;
 		background: transparent;
 		position: relative;
-		display: inline-block;
 		--bgcolor: #f8fafc;
 		--fontcolor: #000;
+		display: block;
 		overflow-x: auto;
+		// white-space: nowrap;
+		max-width: calc(100vw - rem(32));
 
 		&.article__block--table table {
 			margin-bottom: rem(8);
