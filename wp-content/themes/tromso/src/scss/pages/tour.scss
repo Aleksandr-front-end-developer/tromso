@@ -8,10 +8,11 @@
 	font-size: rem(16);
 
 	a {
+		color: #10B981;
 
 		&:hover,
 		&:focus {
-			color: #10B981;
+			text-decoration: underline;
 
 		}
 	}

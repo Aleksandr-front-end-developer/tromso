@@ -2611,9 +2611,13 @@ center iframe {
   font-size: 1rem;
 }
 
+.breadcrumbs a {
+  color: #10B981;
+}
+
 .breadcrumbs a:hover,
 .breadcrumbs a:focus {
-  color: #10B981;
+  text-decoration: underline;
 }
 
 .breadcrumbs svg {
