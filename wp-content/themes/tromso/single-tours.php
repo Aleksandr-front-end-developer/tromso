@@ -92,7 +92,7 @@ $post_id = get_the_ID();
 										<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#users'; ?>"></use>
 									</svg>
 									<span class="text-sm"><span class="card__value">
-											<?php echo $bookings; ?>
+											<?php echo number_format($bookings, 0, '', '.'); ?>
 										</span>+ bookings</span>
 								</div>
 							<?php } ?>

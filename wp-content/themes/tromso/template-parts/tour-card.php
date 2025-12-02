@@ -77,7 +77,7 @@ if (!is_null($tour))
           					<svg class="svg svg--stroke lucide lucide-users" width="18" height="18">
           						<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#users'; ?>"></use>
           					</svg>
-          					<span class="text-sm"><span class="card__value"><?php echo $bookings; ?></span>+ bookings</span>
+          					<span class="text-sm"><span class="card__value"><?php echo number_format($bookings, 0, '', '.'); ?></span>+ bookings</span>
           				</div>
                   <?php } } ?>
           			</div>
