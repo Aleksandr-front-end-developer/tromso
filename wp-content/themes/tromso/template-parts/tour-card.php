@@ -11,7 +11,7 @@ if (!is_null($tour))
 
           		<a href="<?php echo $post_page; ?>">
           			<?php
-								echo get_the_post_thumbnail($tour->ID, 'full', false, array('class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'));
+								echo get_the_post_thumbnail($tour->ID, 'full', array('class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'));
 								?>
           		</a>
 
