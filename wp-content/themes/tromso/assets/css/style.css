@@ -2452,6 +2452,7 @@ img.custom-logo {
 
 .card__button {
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .card__wrapper-info {
