@@ -2921,6 +2921,12 @@ tour-content__content > * {
     line-height: 1.2;
   }
 
+  .card__field {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+
   .single-tours .breadcrumbs {
     padding-top: 7.5rem;
   }

@@ -177,6 +177,14 @@
 	display: none;
 }
 
+.card__field {
+	@media (max-width:$mobile) {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+	}
+}
+
 .card__texts {
 	flex-grow: 2;
 	display: flex;
