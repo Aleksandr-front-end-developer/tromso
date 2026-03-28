@@ -92,11 +92,15 @@ if (!is_null($tour))
                 ?>
           			<div class="card__field">
           				<span class="text-3xl font-bold text-deep-blue"><?php echo $meta['_tour_currency'][0]; ?><span class="card__value"><?php echo $price; ?></span></span>
-          				<span class="text-gray-500 text-sm ml-1">per person</span>
+          				<span class="text-gray-500 text-sm ml-1 per-person"></span>
           			</div>
                 <?php } } ?>
+          			<a href="<?php echo $post_page; ?>" target="_blank"
+          				class="px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 bg-aurora-green text-white hover:bg-green-600 shadow-lg hover:shadow-xl px-6 py-2 card__button">
+          				CHECK AVAILABILITY
+          			</a>
                 <?php
-                if (isset($meta['_tour_url'][0]))
+                /*if (isset($meta['_tour_url'][0]))
                 {
                   $url = $meta['_tour_url'][0];
                   if ($url!='')
@@ -106,7 +110,7 @@ if (!is_null($tour))
           				class="px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 bg-aurora-green text-white hover:bg-green-600 shadow-lg hover:shadow-xl px-6 py-2 card__button">
           				CHECK AVAILABILITY
           			</a>
-                <?php } } ?>
+                <?php } }*/ ?>
           		</div>
           	</div>
           </div>
