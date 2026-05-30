@@ -100,7 +100,7 @@ $post_id = get_the_ID();
 						<?php $link = carbon_get_post_meta($post_id, 'tour_url'); ?>
 						<a href="<?php echo $link; ?>" target="_blank"
 							class="tour-hero__button px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 bg-aurora-green text-white hover:bg-green-600 shadow-lg hover:shadow-xl px-6 py-2 card__button">
-							BOOK NOW
+							CHECK AVAILABILITY
 						</a>
 					</div>
 
