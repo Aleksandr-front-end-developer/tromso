@@ -43,6 +43,9 @@
 							<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#menu'; ?>"></use>
 						</svg>
 					</button>
+          <ul class="polylang-flags">
+            <?php if (function_exists('pll_the_languages')) pll_the_languages(array('show_names' => 1, 'show_flags' => 1, 'dropdown' => 1)); ?>
+          </ul>
 				</div>
 			</div>
 			<nav class="mobile-menu md:hidden bg-deep-blue/98 backdrop-blur-md">

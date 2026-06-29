@@ -50,3 +50,13 @@ include( 'admin/list-tables.php' );
 foreach ( glob( __DIR__ . '/utils/*.php' ) as $file ) {
   include( $file );
 }
+
+/**
+ * auto-translates
+ */
+if (function_exists('pll_languages_list') && count(pll_languages_list())>1)
+{
+  foreach ( glob( __DIR__ . '/translates/*.php' ) as $file ) {
+      include( $file );
+  }
+}

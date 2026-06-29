@@ -1,0 +1,132 @@
+<?php
+
+$translate_lists = array(
+	'posts' => array(
+		//Вакансии
+		VACANCY_POST  => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array( '_announcement_work_wrapper|city|0|0|value', '_title_h1' ),
+			'carbon_wrappers' => array(),
+			'taxonomies'      => array( VACANCY_CATEGORY ),
+		),
+		//Статьи
+		'post'        => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array( '_title_h1', '_image_caption' ),
+			'carbon_wrappers' => array( 'content_items' ),
+			'taxonomies'      => array( 'post_tag' ),
+		),
+		//Страницы
+		/*
+		'page'        => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array(
+				'_title_h1',
+				'_title_block_news',
+				'_title_block_2',
+				'_banner_label',
+				'_banner_title',
+				'_banner_button_label',
+				'_title_block_4',
+				'_title_block_5',
+				'_title_block_6',
+				'_title_block_8',
+				'_title_block_9',
+				'_title_block_10',
+				'_title_block_11',
+			),
+			'carbon_wrappers' => array( 'content_items' ),
+			'taxonomies'      => array(),
+		),
+		*/
+		//Новости
+		NEWS_POST     => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array( '_title_h1', '_image_caption' ),
+			'carbon_wrappers' => array( 'content_items' ),
+			'taxonomies'      => array( /*NEWS_TAGS*/
+				'post_tag'
+			),
+		),
+		//Города
+		CITY_POST     => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array( '_title_h1', '_image_caption', '_name_residents', '_official_langs', '_short_excerpt', '_card_description', '_card_title', '_breadcrumb_text' ),
+			'carbon_wrappers' => array( 'content_items' ),
+			'taxonomies'      => array(),
+		),
+		//Провинции
+		PROVINCE_POST => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array( '_title_h1', '_image_caption', '_capital', '_population_position', '_big_city', '_official_langs', '_short_excerpt' ),
+			'carbon_wrappers' => array( 'content_items' ),
+			'taxonomies'      => array(),
+		),
+		//Событие
+		EVENT_POST    => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array( '_title_h1', '_image_caption', '_location', '_address', '_address_region' ),
+			'carbon_wrappers' => array( 'content_items' ),
+			'taxonomies'      => array( EVENT_CATEGORY ),
+		),
+		//Образование
+		EDUCATION_POST    => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array( '_card_description', '_'.BLOCK_SIMILAR . '_title', '_breadcrumb_text', '_card_title'  ),
+			'carbon_wrappers' => array( 'content_items' ),
+			'taxonomies'      => array( EDUCATION_CATEGORY ),
+		),
+		//Бизнес/Услуги
+		BUSINESS_POST  => array(
+			'main_fields'     => array( 'post_title', 'post_content', 'post_excerpt', ),
+			'meta_fields'     => array( '_business_work_wrapper|address|0|0|value', '_title_h1' ),
+			'carbon_wrappers' => array(),
+			'taxonomies'      => array( BUSINESS_CATEGORY ),
+		),
+	),
+
+
+	'terms' => array(
+		//Категории вакансий
+		VACANCY_CATEGORY => array(
+			'main_fields'     => array( 'name', 'description' ),
+			'meta_fields'     => array(),
+			'carbon_wrappers' => array(),
+		),
+		//Теги записей
+		'post_tag'       => array(
+			'main_fields'     => array( 'name', 'description' ),
+			'meta_fields'     => array(),
+			'carbon_wrappers' => array(),
+		),
+		/*//Теги новостей
+		NEWS_TAGS        => array(
+			'main_fields'     => array( 'name', ),
+			'meta_fields'     => array(),
+			'carbon_wrappers' => array(),
+		),*/
+		NEWS_CATEGORY => array(
+			'main_fields'     => array( 'name', 'description' ),
+			'meta_fields'     => array(),
+			'carbon_wrappers' => array(),
+		),
+		//Категории событий
+		EVENT_CATEGORY   => array(
+			'main_fields'     => array( 'name', 'description' ),
+			'meta_fields'     => array(),
+			'carbon_wrappers' => array(),
+		),
+		//Категории образования
+		EDUCATION_CATEGORY   => array(
+			'main_fields'     => array( 'name', 'description' ),
+			'meta_fields'     => array( '_card_description', '_card_title', '_breadcrumb_text' ),
+			'carbon_wrappers' => array( 'content_items' ),
+		),
+		//Категории Бизнеса/Услуг
+		BUSINESS_CATEGORY => array(
+			'main_fields'     => array( 'name', 'description' ),
+			'meta_fields'     => array(),
+			'carbon_wrappers' => array(),
+		),
+	),
+);

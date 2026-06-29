@@ -132,7 +132,7 @@ class Tailwind_Walker_Nav_Menu extends Walker_Nav_Menu
 	function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
 	{
 		$classes = 'hover:text-aurora-green transition-colors';
-		$li_classes = implode(' ', $item->classes);
+		$li_classes = $classes;//implode(' ', $item->classes);
 
 		$attributes = !empty($item->url) ? ' href="' . esc_url($item->url) . '"' : '';
 
@@ -163,7 +163,7 @@ function mytheme_add_excerpt_to_pages()
 }
 add_action('add_meta_boxes', 'mytheme_add_excerpt_to_pages');
 
-// Регистрация кастомных полей для меню
+/*// Регистрация кастомных полей для меню
 function custom_nav_menu_fields($item_id, $item, $depth, $args)
 {
 ?>
@@ -206,7 +206,7 @@ function custom_nav_menu_item($menu_item)
 	$menu_item->is_button = get_post_meta($menu_item->ID, '_menu_item_is_button', true);
 	return $menu_item;
 }
-add_filter('wp_setup_nav_menu_item', 'custom_nav_menu_item');
+add_filter('wp_setup_nav_menu_item', 'custom_nav_menu_item');*/
 
 
 class Custom_Nav_Walker extends Walker_Nav_Menu
@@ -224,7 +224,7 @@ class Custom_Nav_Walker extends Walker_Nav_Menu
 		if ($depth === 0) {
 			$class_names = 'text-white hover:text-aurora-green transition-colors font-medium';
 		} else {
-			$class_names = 'block w-full text-left px-4 py-2 text-gray-700 hover:bg-ice-blue hover:text-white transition-colors tour-item';
+			$class_names = 'block w-full text-left px-4 py-2 text-gray-700 hover:bg-ice-blue hover:text-white transition-colors';// tour-item';
 		}
 
 		// Добавляем data-атрибуты
@@ -232,7 +232,7 @@ class Custom_Nav_Walker extends Walker_Nav_Menu
 		if (!empty($item->data_section)) {
 			$data_attributes = 'data-section="' . esc_attr($item->data_section) . '"';
 		}
-		if ($item->is_button) {
+		if ($item->url=='#') {
 			$data_attributes .= ' data-discover="true"';
 		}
 
@@ -245,9 +245,9 @@ class Custom_Nav_Walker extends Walker_Nav_Menu
 		}
 		// Для элементов подменю
 		elseif ($depth > 0) {
-			$output .= $indent . '<button class="' . $class_names . '" ' . $data_attributes . '>';
+			$output .= $indent . '<a class="' . $class_names . '" href="' . esc_url($item->url) . '" ' . $data_attributes . '>';
 			$output .= esc_html($item->title);
-			$output .= '</button>';
+			$output .= '</a>';
 		}
 		// Обычные ссылки
 		else {
@@ -291,7 +291,7 @@ class Mobile_Nav_Walker extends Walker_Nav_Menu
 		if ($depth === 0) {
 			$class_names = 'block w-full text-left text-white hover:text-aurora-green transition-colors font-medium py-2';
 		} else {
-			$class_names = 'mobile-tour-item nav-link block w-full text-left text-white/80 hover:text-aurora-green transition-colors py-2 pl-4';
+			$class_names = 'nav-link block w-full text-left text-white/80 hover:text-aurora-green transition-colors py-2 pl-4';//mobile-tour-item 
 		}
 
 		// Data-атрибуты
@@ -307,9 +307,9 @@ class Mobile_Nav_Walker extends Walker_Nav_Menu
 		}
 		// Для дочерних элементов
 		elseif ($depth > 0) {
-			$output .= $indent . '<button class="' . $class_names . '" ' . $data_attributes . '>';
+			$output .= $indent . '<a class="' . $class_names . '" href="' . esc_url($item->url) . '" ' . $data_attributes . '>';
 			$output .= esc_html($item->title);
-			$output .= '</button>';
+			$output .= '</a>';
 		}
 		// Обычные ссылки
 		else {
@@ -335,5 +335,23 @@ class Mobile_Nav_Walker extends Walker_Nav_Menu
 	public function end_lvl(&$output, $depth = 0, $args = null)
 	{
 		// Уровни уже обрабатываются в end_el
+	}
+}
+
+add_action( 'wp_head', 'code_for_head', 1000 );
+function code_for_head() {
+  
+	$code = carbon_get_theme_option( 'header_add'.get_frontend_language_suffix() );
+	if ( ! is_null( $code ) && $code != '' ) {
+		echo $code;
+	}
+}
+
+add_action( 'wp_footer', 'code_for_footer', 1000 );
+function code_for_footer() {
+
+	$code = carbon_get_theme_option( 'footer_add'.get_frontend_language_suffix() );
+	if ( ! is_null( $code ) && $code != '' ) {
+		echo $code;
 	}
 }

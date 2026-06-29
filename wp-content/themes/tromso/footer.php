@@ -4,6 +4,7 @@
  * The template for displaying the footer
  */
 
+$lng = get_frontend_language_suffix();
 ?>
 
 
@@ -12,15 +13,15 @@
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
 			<div>
         <?php
-        $title = carbon_get_theme_option('column_1_title');
+        $title = carbon_get_theme_option('column_1_title'.$lng);
         if (isset($title) && $title!='') {
         ?>
 				<h3 class="text-2xl font-bold mb-4"><?php echo $title; ?></h3>
         <?php } ?>
-				<div class="text-white/80 mb-4"><?php echo wpautop(carbon_get_theme_option('footer_description')); ?></div>
+				<div class="text-white/80 mb-4"><?php echo wpautop(carbon_get_theme_option('footer_description'.$lng)); ?></div>
 				<div class="flex gap-4">
 					<?php
-					$social = carbon_get_theme_option('social_links');
+					$social = carbon_get_theme_option('social_links'.$lng);
 					if (is_array($social)) {
 						foreach ($social as $item) {
 					?>
@@ -37,24 +38,24 @@
 			</div>
 			<div>
         <?php
-        $title = carbon_get_theme_option('column_2_title');
+        $title = carbon_get_theme_option('column_2_title'.$lng);
         if (isset($title) && $title!='') {
         ?>
-				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_2_title'); ?></h4>
+				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_2_title'.$lng); ?></h4>
         <?php } ?>
 				<div class="space-y-3 text-white/80">
 					<div class="flex items-start gap-2">
 						<svg class="svg svg--stroke lucide lucide-map-pin mt-1 flex-shrink-0" width="20" height="20">
 							<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#map-pin'; ?>"></use>
 						</svg>
-						<span><?php echo carbon_get_theme_option('column_2_address'); ?></span>
+						<span><?php echo carbon_get_theme_option('column_2_address'.$lng); ?></span>
 					</div>
 					<div class="flex items-center gap-2">
 						<svg class="svg svg--stroke lucide lucide-phone" width="20" height="20">
 							<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#phone'; ?>"></use>
 						</svg>
 						<?php
-						$phone = carbon_get_theme_option('column_2_phone');
+						$phone = carbon_get_theme_option('column_2_phone'.$lng);
 						$cleaned_phone = preg_replace('/[^\d\+]/', '', $phone);
 						?>
 						<a href="tel:<?php echo $cleaned_phone; ?>" class="hover:text-aurora-green transition-colors"><?php echo $phone; ?></a>
@@ -63,16 +64,16 @@
 						<svg class="svg svg--stroke lucide lucide-mail" width="20" height="20">
 							<use xlink:href="<?php echo THEME_URI . '/assets/img/icons/icons.svg#mail'; ?>"></use>
 						</svg>
-						<a href="mailto:<?php echo carbon_get_theme_option('column_2_email'); ?>" class="hover:text-aurora-green transition-colors"><?php echo carbon_get_theme_option('column_2_email'); ?></a>
+						<a href="mailto:<?php echo carbon_get_theme_option('column_2_email'.$lng); ?>" class="hover:text-aurora-green transition-colors"><?php echo carbon_get_theme_option('column_2_email'.$lng); ?></a>
 					</div>
 				</div>
 			</div>
 			<div>
         <?php
-        $title = carbon_get_theme_option('column_3_title');
+        $title = carbon_get_theme_option('column_3_title'.$lng);
         if (isset($title) && $title!='') {
         ?>
-				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_3_title'); ?></h4>
+				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_3_title'.$lng); ?></h4>
         <?php } ?>
 
 				<?php
@@ -88,19 +89,21 @@
 			</div>
 			<div class="footer-column footer-column--last">
         <?php
-        $title = carbon_get_theme_option('column_4_title');
+        $title = carbon_get_theme_option('column_4_title'.$lng);
         if (isset($title) && $title!='') {
         ?>
-				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_4_title'); ?></h4>
+				<h4 class="text-xl font-bold mb-4"><?php echo carbon_get_theme_option('column_4_title'.$lng); ?></h4>
         <?php } ?>
-				<?php echo do_shortcode(carbon_get_theme_option('column_4_contact_form')); ?>
+				<?php echo do_shortcode(carbon_get_theme_option('column_4_contact_form'.$lng)); ?>
 			</div>
 		</div>
 		<div class="border-t border-white/20 pt-8 text-center text-white/60">
-			<p><?php echo str_replace('%current_year%', date('Y'), carbon_get_theme_option('copyright_text')); ?></p>
+			<p><?php echo str_replace('%current_year%', date('Y'), carbon_get_theme_option('copyright_text'.$lng)); ?></p>
 		</div>
 	</div>
 </footer>
 
 
 <?php wp_footer(); ?>
+</body>
+</html>

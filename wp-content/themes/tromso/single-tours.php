@@ -66,7 +66,7 @@ $post_id = get_the_ID();
 										<?php echo $price; ?>
 									</span>
 								</span>
-								<span class="text-gray-500 text-sm ml-1">per person</span>
+								<span class="text-gray-500 text-sm ml-1 per-person"></span>
 							</div>
 						<?php } ?>
 						<div class="tour-hero__data flex items-center gap-1">
@@ -80,7 +80,7 @@ $post_id = get_the_ID();
 									</svg>
 									<span class="text-sm"><span class="card__value">
 											<?php echo $hours; ?>
-										</span> hours</span>
+										</span> <?php _e('hours', 'tromso'); ?></span>
 								</div>
 							<?php } ?>
 							<?php
@@ -93,14 +93,14 @@ $post_id = get_the_ID();
 									</svg>
 									<span class="text-sm"><span class="card__value">
 											<?php echo number_format($bookings, 0, '', '.'); ?>
-										</span>+ bookings</span>
+										</span>+ <?php _e('bookings', 'tromso'); ?></span>
 								</div>
 							<?php } ?>
 						</div>
 						<?php $link = carbon_get_post_meta($post_id, 'tour_url'); ?>
 						<a href="<?php echo $link; ?>" target="_blank"
 							class="tour-hero__button px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 bg-aurora-green text-white hover:bg-green-600 shadow-lg hover:shadow-xl px-6 py-2 card__button">
-							CHECK AVAILABILITY
+							<?php _e('CHECK AVAILABILITY', 'tromso'); ?>
 						</a>
 					</div>
 
@@ -214,13 +214,13 @@ $post_id = get_the_ID();
 	?>
 		<section class="tour-reviews tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 py-16 pt-4  mx-auto">
 			<div class="tour-reviews__wrapper">
-				<h2 class="content-block__title">Reviews</h2>
+				<h2 class="content-block__title"><?php _e('Reviews', 'tromso'); ?></h2>
 				<div class="stars flex items-center justify-center gap-2 mb-8 bg-white/10 backdrop-blur-sm  rounded-full inline-flex">
 					<div class="flex">
 						<?php echo get_rating_stars($rating); ?>
 					</div>
 					<span class="tour-reviews__number font-semibold text-lg"><?php echo $rating; ?></span>
-					<a href="<?php echo $link; ?>" class="ml-2 text-white/90 hover:text-aurora-green transition-colors underline font-medium">Read more reviews</a>
+					<a href="<?php echo $link; ?>" class="ml-2 text-white/90 hover:text-aurora-green transition-colors underline font-medium"><?php _e('Read more reviews', 'tromso'); ?></a>
 				</div>
 			</div>
 		</section>

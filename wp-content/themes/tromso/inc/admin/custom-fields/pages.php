@@ -367,4 +367,12 @@ function pages_options() {
         ->set_width( 50 ),
      ));
 
+
+  Container::make( 'post_meta', 'Auto translate settings' )
+       ->add_fields( array(
+         Field::make( 'checkbox', 'post_auto_translate', 'Translate this post automatically. This only works for translating posts from the site\'s primary language to other languages. Only PUBLISHED posts will be translated. Only post types for which the "Action during translation" option is set to "translate" in the site\'s auto-translation settings will be translated.' )
+              ->set_option_value( '1' )
+              ->set_default_value( '1' ),
+       ) );
+
 }

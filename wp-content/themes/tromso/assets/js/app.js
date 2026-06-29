@@ -278,6 +278,83 @@
                 }), 100);
             }
         }));
+        var currentDomain = window.location.hostname;
+        var currentPath = window.location.pathname;
+        $("a[href]").not(".no-track").on("click", (function(e) {
+            var $link = $(this);
+            var href = $link.attr("href");
+            if (languageData.current_language == languageData.default_language) return;
+            if (!href || href.indexOf("javascript:") === 0 || href.indexOf("mailto:") === 0 || href.indexOf("tel:") === 0) return;
+            if (href.indexOf("#") === 0) return;
+            if (isExternalLink(href, currentDomain)) return;
+            if (isSamePageWithAnchor(href, currentPath, currentDomain)) return;
+            if (hasLanguagePrefix(href, languageData.current_language)) return;
+            e.preventDefault();
+            var params = {
+                check_for_language: "1",
+                current_language: languageData.current_language
+            };
+            var absoluteUrl = $link.prop("href");
+            var newUrl = addParamsToUrl(absoluteUrl, params);
+            if (href.indexOf("#") !== -1) {
+                var anchor = href.split("#")[1];
+                if (anchor) newUrl = newUrl.split("#")[0] + "#" + anchor;
+            }
+            window.location.href = newUrl;
+        }));
+        function isExternalLink(href, currentDomain) {
+            if (href.indexOf("/") === 0) return false;
+            if (href.indexOf("http") !== 0 && href.indexOf("//") !== 0) return false;
+            try {
+                var linkDomain = new URL(href, window.location.origin).hostname;
+                return linkDomain.replace(/^www\./, "") !== currentDomain.replace(/^www\./, "");
+            } catch (e) {
+                return true;
+            }
+        }
+        function isSamePageWithAnchor(href, currentPath, currentDomain) {
+            if (href.indexOf("#") === -1) return false;
+            try {
+                var url = new URL(href, window.location.origin);
+                var linkPath = url.pathname;
+                var linkDomain = url.hostname;
+                var isSameDomain = linkDomain.replace(/^www\./, "") === currentDomain.replace(/^www\./, "");
+                var isSamePath = linkPath === currentPath || linkPath === "" || linkPath === "/";
+                return isSameDomain && isSamePath;
+            } catch (e) {
+                if (href.indexOf("/") === 0) {
+                    var pathWithoutAnchor = href.split("#")[0];
+                    return pathWithoutAnchor === currentPath || pathWithoutAnchor === "" || pathWithoutAnchor === "/";
+                }
+                return false;
+            }
+        }
+        function addParamsToUrl(url, params) {
+            try {
+                var urlObj = new URL(url);
+                $.each(params, (function(key, value) {
+                    urlObj.searchParams.set(key, value);
+                }));
+                return urlObj.toString();
+            } catch (e) {
+                var separator = url.indexOf("?") !== -1 ? "&" : "?";
+                var paramString = $.map(params, (function(value, key) {
+                    return key + "=" + encodeURIComponent(value);
+                })).join("&");
+                return url + separator + paramString;
+            }
+        }
+        function hasLanguagePrefix(href, language) {
+            var pattern = new RegExp("^/" + language + "/");
+            try {
+                var url = new URL(href, window.location.origin);
+                var pathname = url.pathname;
+                return pattern.test(pathname);
+            } catch (e) {
+                if (href.indexOf("/") === 0) return pattern.test(href);
+                return false;
+            }
+        }
     }));
     spollers();
 })();
