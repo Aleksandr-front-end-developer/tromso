@@ -20,7 +20,7 @@ function auto_translate_collect_menu_translation_data($menu_id, $menu_data = nul
   $translate = ($translate_lists['menus']['auto_translate_menus_translate_action'] == 'translate');
 
   
-  $menu_lng = get_term_language($menu_id);
+  $menu_lng = pll_get_term_language($menu_id);
   $default_lng = get_default_language();
   $languages = get_languages_list();
   
@@ -32,7 +32,7 @@ function auto_translate_collect_menu_translation_data($menu_id, $menu_data = nul
     $translations[$default_lng] = $menu_id;
     pll_save_term_translations($translations);
     
-    $menu_lng = get_term_language($menu_id);
+    $menu_lng = pll_get_term_language($menu_id);
   }
   
   // Собираем данные только для меню на языке по умолчанию
