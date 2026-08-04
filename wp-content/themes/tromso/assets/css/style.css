@@ -1814,6 +1814,119 @@ body {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+/* Базовий контейнер селекту */
+
+.custom-lang-dropdown {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  /* Можна змінити ширину */
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* Кнопка-шапка (ідеально копіює ваш input) */
+
+.custom-lang-dropdown .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  /* px-4 py-2 */
+  border-radius: 0.5rem;
+  /* rounded-lg */
+  background-color: rgba(255, 255, 255, 0.1);
+  /* bg-white-10 */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* border-white-20 */
+  color: #ffffff;
+  /* text-white */
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Фокус/клік на кнопку */
+
+.custom-lang-dropdown .dropdown-toggle:focus {
+  border-color: #00ff66;
+  /* Колір aurora-green (замініть на ваш точний hex, якщо цей відрізняється) */
+}
+
+/* Стрілочка */
+
+.custom-lang-dropdown .arrow-icon {
+  width: 1rem;
+  height: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  /* text-white-50 */
+  transition: transform 0.2s ease;
+  pointer-events: none;
+  margin-left: 0.4375rem;
+}
+
+/* Поворот стрілочки при відкритті */
+
+.custom-lang-dropdown .arrow-icon.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Випадаюче меню (ul) */
+
+.custom-lang-dropdown .dropdown-menu {
+  position: absolute;
+  z-index: 50;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 0.25rem;
+  /* mt-1 */
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  /* rounded-lg */
+  background-color: #1a1a1a;
+  /* Темний фон, щоб текст читався */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* border-white-20 */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* Прихований стан меню */
+
+.custom-lang-dropdown .dropdown-menu.hidden {
+  display: none;
+}
+
+/* Посилання всередині меню (li a) */
+
+.custom-lang-dropdown .dropdown-menu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  /* px-4 py-2 */
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Ефект наведення на мову */
+
+.custom-lang-dropdown .dropdown-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  /* hover:bg-white-10 */
+}
+
+/* Активна (поточна) мова в списку */
+
+.custom-lang-dropdown .dropdown-menu .current-item a {
+  background-color: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  color: #00ff66;
+  /* Текст кольору aurora-green */
+}
+
 :root {
   --tr-dur: 250ms;
   --tr-fun: ease-out;
@@ -2199,6 +2312,10 @@ header.menu-open .mobile-menu {
 
 .desktop-header {
   display: none;
+}
+
+.mobile-toggle {
+  order: 3;
 }
 
 .custom-logo-link {
@@ -2850,10 +2967,6 @@ tour-content__content > * {
   .desktop-header {
     display: flex;
   }
-
-  .mobile-toggle {
-    display: none;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -2884,6 +2997,10 @@ tour-content__content > * {
   .md\:p-12 {
     padding: 3rem;
   }
+
+  .mobile-toggle {
+    display: none;
+  }
 }
 
 @media (min-width: 64em) {
@@ -2913,6 +3030,14 @@ tour-content__content > * {
   .lg\:text-7xl {
     font-size: 4.5rem;
     line-height: 1;
+  }
+}
+
+@media (max-width: 1023px) {
+  .polylang-flags {
+    margin-left: auto;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
   }
 }
 

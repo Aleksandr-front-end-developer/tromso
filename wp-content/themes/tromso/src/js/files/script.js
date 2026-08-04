@@ -135,165 +135,181 @@ if ("undefined" !== typeof jQuery) {
       }
     });
 
-
     var currentDomain = window.location.hostname;
     var currentPath = window.location.pathname;
-    
+
     // Обработка кликов
-    $('a[href]').not('.no-track').on('click', function(e) {
+    $("a[href]")
+      .not(".no-track")
+      .on("click", function (e) {
         var $link = $(this);
-        var href = $link.attr('href');
-        
+        var href = $link.attr("href");
+
         // пропускаем, если текущий язык дефолтный
-        if (languageData.current_language==languageData.default_language) {
-            return;
+        if (languageData.current_language == languageData.default_language) {
+          return;
         }
 
         // Пропускаем специальные ссылки
-        if (!href || href.indexOf('javascript:') === 0 || 
-            href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) {
-            return;
+        if (!href || href.indexOf("javascript:") === 0 || href.indexOf("mailto:") === 0 || href.indexOf("tel:") === 0) {
+          return;
         }
-        
+
         // ✅ ЯКОРИ НА ТЕКУЩЕЙ СТРАНИЦЕ - ПРОПУСКАЕМ
         // Если ссылка начинается с # - это якорь на этой же странице
-        if (href.indexOf('#') === 0) {
-            return; // Ничего не делаем, стандартное поведение
+        if (href.indexOf("#") === 0) {
+          return; // Ничего не делаем, стандартное поведение
         }
-        
+
         // Проверяем, не внешняя ли ссылка
         if (isExternalLink(href, currentDomain)) {
-            return; // Внешние ссылки пропускаем
+          return; // Внешние ссылки пропускаем
         }
-        
+
         // Проверяем, ведёт ли ссылка на текущую страницу (с якорем)
         if (isSamePageWithAnchor(href, currentPath, currentDomain)) {
-            return; // Это ссылка на текущую страницу с якорем - пропускаем
+          return; // Это ссылка на текущую страницу с якорем - пропускаем
         }
 
         // пропускаем ссылки, которые уже содержат правильный языковой префикс
         if (hasLanguagePrefix(href, languageData.current_language)) {
-            return; // Ссылка уже с правильным языком - пропускаем
+          return; // Ссылка уже с правильным языком - пропускаем
         }
-            
+
         // ✅ ТОЛЬКО ДЛЯ ССЫЛОК НА ДРУГИЕ СТРАНИЦЫ
         e.preventDefault();
 
         var params = {
-            'check_for_language': '1',
-            'current_language': languageData.current_language,
+          check_for_language: "1",
+          current_language: languageData.current_language,
         };
-    
-        
-        var absoluteUrl = $link.prop('href');
+
+        var absoluteUrl = $link.prop("href");
         var newUrl = addParamsToUrl(absoluteUrl, params);
-        
+
         // Если в ссылке был якорь - сохраняем его
-        if (href.indexOf('#') !== -1) {
-            var anchor = href.split('#')[1];
-            if (anchor) {
-                newUrl = newUrl.split('#')[0] + '#' + anchor;
-            }
+        if (href.indexOf("#") !== -1) {
+          var anchor = href.split("#")[1];
+          if (anchor) {
+            newUrl = newUrl.split("#")[0] + "#" + anchor;
+          }
         }
-        
+
         window.location.href = newUrl;
-    });
-    
+      });
+
     // ФУНКЦИЯ ПРОВЕРКИ ВНЕШНЕЙ ССЫЛКИ
     function isExternalLink(href, currentDomain) {
-        // Относительные ссылки - не внешние
-        if (href.indexOf('/') === 0) {
-            return false;
-        }
-        
-        // Если нет протокола - относительная
-        if (href.indexOf('http') !== 0 && href.indexOf('//') !== 0) {
-            return false;
-        }
-        
-        try {
-            var linkDomain = new URL(href, window.location.origin).hostname;
-            return linkDomain.replace(/^www\./, '') !== currentDomain.replace(/^www\./, '');
-        } catch (e) {
-            return true;
-        }
+      // Относительные ссылки - не внешние
+      if (href.indexOf("/") === 0) {
+        return false;
+      }
+
+      // Если нет протокола - относительная
+      if (href.indexOf("http") !== 0 && href.indexOf("//") !== 0) {
+        return false;
+      }
+
+      try {
+        var linkDomain = new URL(href, window.location.origin).hostname;
+        return linkDomain.replace(/^www\./, "") !== currentDomain.replace(/^www\./, "");
+      } catch (e) {
+        return true;
+      }
     }
-    
+
     // ФУНКЦИЯ ПРОВЕРКИ - ССЫЛКА НА ЭТУ ЖЕ СТРАНИЦУ С ЯКОРЕМ
     function isSamePageWithAnchor(href, currentPath, currentDomain) {
-        // Если в ссылке нет якоря - это не наш случай
-        if (href.indexOf('#') === -1) {
-            return false;
+      // Если в ссылке нет якоря - это не наш случай
+      if (href.indexOf("#") === -1) {
+        return false;
+      }
+
+      try {
+        // Создаём объект URL для анализа
+        var url = new URL(href, window.location.origin);
+        var linkPath = url.pathname;
+        var linkDomain = url.hostname;
+
+        // Проверяем: совпадает ли домен и путь с текущей страницей
+        var isSameDomain = linkDomain.replace(/^www\./, "") === currentDomain.replace(/^www\./, "");
+        var isSamePath = linkPath === currentPath || linkPath === "" || linkPath === "/";
+
+        return isSameDomain && isSamePath;
+      } catch (e) {
+        // Если не удалось распарсить URL, используем простую проверку
+        // Для относительных ссылок
+        if (href.indexOf("/") === 0) {
+          var pathWithoutAnchor = href.split("#")[0];
+          return pathWithoutAnchor === currentPath || pathWithoutAnchor === "" || pathWithoutAnchor === "/";
         }
-        
-        try {
-            // Создаём объект URL для анализа
-            var url = new URL(href, window.location.origin);
-            var linkPath = url.pathname;
-            var linkDomain = url.hostname;
-            
-            // Проверяем: совпадает ли домен и путь с текущей страницей
-            var isSameDomain = linkDomain.replace(/^www\./, '') === currentDomain.replace(/^www\./, '');
-            var isSamePath = linkPath === currentPath || 
-                            linkPath === '' || 
-                            linkPath === '/';
-            
-            return isSameDomain && isSamePath;
-            
-        } catch (e) {
-            // Если не удалось распарсить URL, используем простую проверку
-            // Для относительных ссылок
-            if (href.indexOf('/') === 0) {
-                var pathWithoutAnchor = href.split('#')[0];
-                return pathWithoutAnchor === currentPath || 
-                       pathWithoutAnchor === '' || 
-                       pathWithoutAnchor === '/';
-            }
-            return false;
-        }
+        return false;
+      }
     }
 
     // ФУНКЦИЯ ДОБАВЛЕНИЯ ПАРАМЕТРОВ
     function addParamsToUrl(url, params) {
-        try {
-            var urlObj = new URL(url);
-            $.each(params, function(key, value) {
-                urlObj.searchParams.set(key, value);
-            });
-            return urlObj.toString();
-        } catch (e) {
-            // Fallback
-            var separator = url.indexOf('?') !== -1 ? '&' : '?';
-            var paramString = $.map(params, function(value, key) {
-                return key + '=' + encodeURIComponent(value);
-            }).join('&');
-            return url + separator + paramString;
-        }
+      try {
+        var urlObj = new URL(url);
+        $.each(params, function (key, value) {
+          urlObj.searchParams.set(key, value);
+        });
+        return urlObj.toString();
+      } catch (e) {
+        // Fallback
+        var separator = url.indexOf("?") !== -1 ? "&" : "?";
+        var paramString = $.map(params, function (value, key) {
+          return key + "=" + encodeURIComponent(value);
+        }).join("&");
+        return url + separator + paramString;
+      }
     }
 
     // ✅ НОВАЯ ФУНКЦИЯ: Проверка наличия языкового префикса в ссылке
     function hasLanguagePrefix(href, language) {
-        
-        var pattern = new RegExp('^/' + language + '/');
-        
-        try {
-            // Создаём объект URL для анализа
-            var url = new URL(href, window.location.origin);
-            var pathname = url.pathname;
-            
-            // Проверяем, начинается ли путь с /{language}/
-            return pattern.test(pathname);
-            
-        } catch (e) {
-            // Если не удалось распарсить URL, проверяем как строку
-            // Для относительных ссылок
-            if (href.indexOf('/') === 0) {
-                return pattern.test(href);
-            }
-            return false;
+      var pattern = new RegExp("^/" + language + "/");
+
+      try {
+        // Создаём объект URL для анализа
+        var url = new URL(href, window.location.origin);
+        var pathname = url.pathname;
+
+        // Проверяем, начинается ли путь с /{language}/
+        return pattern.test(pathname);
+      } catch (e) {
+        // Если не удалось распарсить URL, проверяем как строку
+        // Для относительных ссылок
+        if (href.indexOf("/") === 0) {
+          return pattern.test(href);
         }
+        return false;
+      }
     }
-    
+
+    // Селект для полиленга
+
+    $(".custom-lang-dropdown .dropdown-toggle").on("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var $dropdown = $(this).closest(".custom-lang-dropdown");
+      var $menu = $dropdown.find(".dropdown-menu");
+      var $arrow = $dropdown.find(".arrow-icon");
+
+      $(".custom-lang-dropdown .dropdown-menu").not($menu).addClass("hidden");
+      $(".custom-lang-dropdown .arrow-icon").not($arrow).removeClass("rotate-180");
+
+      $menu.toggleClass("hidden");
+      $arrow.toggleClass("rotate-180");
+    });
+
+    $(document).on("click", function (e) {
+      if (!$(e.target).closest(".custom-lang-dropdown").length) {
+        $(".custom-lang-dropdown .dropdown-menu").addClass("hidden");
+        $(".custom-lang-dropdown .arrow-icon").removeClass("rotate-180");
+      }
+    });
+
     //================= END JQUERY ===============
   });
 }

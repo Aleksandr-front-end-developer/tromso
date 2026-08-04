@@ -44,11 +44,28 @@ header.menu-open .mobile-menu {
 		display: flex;
 	}
 
+
+}
+
+
+
+.mobile-toggle {
+	order: 3;
+}
+
+@media (min-width: 1024px) {
 	.mobile-toggle {
 		display: none;
 	}
 }
 
+@media (max-width: 1023px) {
+	.polylang-flags {
+		margin-left: auto;
+		padding-left: rem(15);
+		padding-right: rem(15);
+	}
+}
 
 .custom-logo-link {
 	height: rem(60);
