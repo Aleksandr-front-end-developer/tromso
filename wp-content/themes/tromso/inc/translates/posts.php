@@ -86,7 +86,7 @@ function auto_translate_for_insert_post($post_id, $post, $update) {
   }
 }
 
-function clone_post_for_translate($post, $lng_to) {
+function clone_post_for_translate($post, $lng_to, $title) {
 global $wpdb;
 
   $new_post_id = get_language_post($post->ID, $lng_to);
@@ -123,6 +123,7 @@ global $wpdb;
    
     unset($new_post['ID']);
     unset($new_post['guid']);
+    $new_post['post_title'] = $title;
     $new_post['post_status'] = 'draft';
     $new_post_id = wp_insert_post( $new_post, false, false );
     
@@ -143,6 +144,49 @@ global $wpdb;
    
   } elseif ($new_post_id!=0)
   {
+    $translate_change_slugs = carbon_get_theme_option_lng('translate_change_slugs');
+    if ($translate_change_slugs=='1')
+    {
+      $old_permalink = get_permalink($new_post_id);
+      $new_post_data = get_post($new_post_id, ARRAY_A);
+
+      $new_post_data['post_title'] = sanitize_text_field($title);
+      $new_post_data['post_name'] = sanitize_title($title, $post->post_title);
+      $new_post_id = wp_insert_post( $new_post_data, false, false );
+      $new_permalink = get_permalink($new_post_id);
+      
+      if ( class_exists( 'Red_Item' ) && $new_permalink!=$old_permalink)
+      {
+        $redirect_data = [
+          'url'         => $old_permalink,
+          'action_data' => [ 'url' => get_permalink($new_post_id) ],
+          'action_type' => 'url',
+          'match_type'  => 'url',
+          'group_id'    => 1,
+          'enabled'     => true,
+        ];
+        $redirect_id = Red_Item::create( $redirect_data );
+      }
+    }
+    
+    /*$new_post_data = get_post($new_post_id);
+    $old_permalink = get_permalink($new_post_id);
+    if (strpos($new_post_data->post_name, preg_replace('/-\d+$/', '', $post->post_name))!==false)
+    {
+      $new_post = array(
+        'ID' => $new_post_id,
+        'post_title' => $title,
+        'post_name' => sanitize_title($title, $post->post_title),
+      );
+      $new_post_id = wp_insert_post( $new_post, false, false );
+      
+      if ( class_exists( 'Red_Options' ) && class_exists( 'Red_Monitor' ) )
+      {
+        $redirection_monitor = new Red_Monitor( Red_Options::get() );
+        $redirection_monitor->check_for_modified_slug( $new_post_id, $old_permalink );
+      }
+    }*/
+    
     $wpdb->delete( $wpdb->postmeta, [ 'post_id'=>$new_post_id ] );
     clean_post_cache( $new_post_id );
   }
@@ -206,8 +250,9 @@ function final_translate_post($translate_lists, $row, $languages) {
               }
             }
           }
-
-          $new_post_id = clone_post_for_translate($post, $row['lng_to']);
+          
+          $title = get_translate_string($post->post_title, $row['lng_from'], $row['lng_to']);
+          $new_post_id = clone_post_for_translate($post, $row['lng_to'], $title);
           if ($new_post_id!=0)
           {
             $new_post = get_post($new_post_id, ARRAY_A);

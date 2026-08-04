@@ -211,6 +211,9 @@ function mainmenu_theme_options()
           )
       ) )
       ->set_autoload(true),
+      Field::make( 'checkbox', 'translate_change_slugs' . $lang, 'Change slugs for existing translated posts when changing titles (with 301 redirect if the Redirection plugin is installed)' . $lang_str )
+      ->set_option_value( '1' )
+      ->set_autoload(true),
       Field::make( 'html', 'translate_chat_gpt_error_information_text' . $lang )
       ->set_html( '<h2><strong>Last error requesting CHAT GPT:</strong></h2><p style="color:red">'.$tarnslate_error.'</p>' ),
     )))
