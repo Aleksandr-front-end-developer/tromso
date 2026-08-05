@@ -367,7 +367,7 @@
             const $this = $(this);
             const $currentLang = $this.find("li.current-lang");
             $this.wrap('<div class="select-custom"></div>');
-            const currentHtml = $currentLang.html();
+            const currentHtml = $currentLang.find("a").html();
             $this.before(`\n    <div class="select-styled">\n      <span class="select-content">\n        ${currentHtml}\n      </span>\n      <svg class="arrow-icon" viewBox="0 0 20 20" fill="currentColor">\n        <path d="M5 7l5 5 5-5H5z"/>\n      </svg>\n    </div>\n  `);
             const $styledSelect = $this.prev(".select-styled");
             const $selectContent = $styledSelect.find(".select-content");

@@ -300,7 +300,7 @@ if ("undefined" !== typeof jQuery) {
       const $currentLang = $this.find("li.current-lang");
 
       $this.wrap('<div class="select-custom"></div>');
-      const currentHtml = $currentLang.html();
+      const currentHtml = $currentLang.find("a").html();
 
       $this.before(`
     <div class="select-styled">
