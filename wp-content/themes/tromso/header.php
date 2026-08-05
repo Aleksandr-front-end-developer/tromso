@@ -44,45 +44,7 @@
 						</svg>
 					</button>
 					<ul class="polylang-flags">
-						<?php
-						if (function_exists('pll_the_languages')) {
-              //pll_the_languages(array('show_names' => 1, 'show_flags'=>1, 'dropdown'=>0));
-							$languages = pll_the_languages(array('raw' => 1));
-
-							if (! empty($languages)) {
-
-								$current_lang = array_filter($languages, function ($l) {
-									return $l['current_lang'];
-								});
-								$current_lang = !empty($current_lang) ? reset($current_lang) : $languages[0];
-						?>
-
-								<div class="relative custom-lang-dropdown">
-
-
-									<button type="button" class="dropdown-toggle">
-										<span><?php echo esc_html($current_lang['name']); ?></span>
-
-										<svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-										</svg>
-									</button>
-
-									<ul class="absolute z-50 hidden dropdown-menu">
-										<?php foreach ($languages as $lang) : ?>
-											<li class="<?php echo $lang['current_lang'] ? 'current-item' : ''; ?>">
-												<a href="<?php echo esc_url($lang['url']); ?>">
-													<?php echo esc_html($lang['name']); ?>
-												</a>
-											</li>
-										<?php endforeach; ?>
-									</ul>
-
-								</div>
-						<?php
-							}
-						}
-						?>
+						<?php if (function_exists('pll_the_languages')) pll_the_languages(array('show_names' => 1, 'show_flags' => 0)); ?>
 					</ul>
 				</div>
 			</div>

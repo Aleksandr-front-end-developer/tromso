@@ -286,28 +286,50 @@ if ("undefined" !== typeof jQuery) {
       }
     }
 
-    // Селект для полиленга
+    //================= селект для переключения языка polylang ===============
+    $(".polylang-flags").each(function () {
+      const $this = $(this);
 
-    $(".custom-lang-dropdown .dropdown-toggle").on("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+      // обгортаємо
+      $this.wrap('<div class="select-custom"></div>');
 
-      var $dropdown = $(this).closest(".custom-lang-dropdown");
-      var $menu = $dropdown.find(".dropdown-menu");
-      var $arrow = $dropdown.find(".arrow-icon");
+      // вставляємо кастомний селект
+      $this.before(`
+    <div class="select-styled">
+      <span class="select-text"></span>
+      <svg class="arrow-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M5 7l5 5 5-5H5z"/>
+      </svg>
+    </div>
+  `);
 
-      $(".custom-lang-dropdown .dropdown-menu").not($menu).addClass("hidden");
-      $(".custom-lang-dropdown .arrow-icon").not($arrow).removeClass("rotate-180");
+      const $styledSelect = $this.prev(".select-styled");
+      const $text = $styledSelect.find(".select-text");
 
-      $menu.toggleClass("hidden");
-      $arrow.toggleClass("rotate-180");
-    });
+      $text.text($this.find("li.current-lang").text());
 
-    $(document).on("click", function (e) {
-      if (!$(e.target).closest(".custom-lang-dropdown").length) {
-        $(".custom-lang-dropdown .dropdown-menu").addClass("hidden");
-        $(".custom-lang-dropdown .arrow-icon").removeClass("rotate-180");
-      }
+      $styledSelect.on("click", function (e) {
+        e.stopPropagation();
+
+        $(".select-styled.active").not(this).removeClass("active").next(".polylang-flags").removeClass("open");
+
+        $(this).toggleClass("active");
+        $this.toggleClass("open");
+      });
+
+      $this.find("li").on("click", function (e) {
+        e.stopPropagation();
+
+        $text.text($(this).text());
+
+        $styledSelect.removeClass("active");
+        $this.removeClass("open");
+      });
+
+      $(document).on("click", function () {
+        $styledSelect.removeClass("active");
+        $this.removeClass("open");
+      });
     });
 
     //================= END JQUERY ===============
