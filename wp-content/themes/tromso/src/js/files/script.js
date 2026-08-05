@@ -180,8 +180,8 @@ if ("undefined" !== typeof jQuery) {
         e.preventDefault();
 
         var params = {
-          check_for_language: "1",
-          current_language: languageData.current_language,
+          //check_for_language: "1",
+          //current_language: languageData.current_language,
         };
 
         var absoluteUrl = $link.prop("href");

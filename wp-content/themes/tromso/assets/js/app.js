@@ -290,10 +290,7 @@
             if (isSamePageWithAnchor(href, currentPath, currentDomain)) return;
             if (hasLanguagePrefix(href, languageData.current_language)) return;
             e.preventDefault();
-            var params = {
-                check_for_language: "1",
-                current_language: languageData.current_language
-            };
+            var params = {};
             var absoluteUrl = $link.prop("href");
             var newUrl = addParamsToUrl(absoluteUrl, params);
             if (href.indexOf("#") !== -1) {

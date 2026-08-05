@@ -46,6 +46,7 @@
 					<ul class="polylang-flags">
 						<?php
 						if (function_exists('pll_the_languages')) {
+              //pll_the_languages(array('show_names' => 1, 'show_flags'=>1, 'dropdown'=>0));
 							$languages = pll_the_languages(array('raw' => 1));
 
 							if (! empty($languages)) {
