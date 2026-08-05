@@ -25,7 +25,7 @@ $post_id = get_the_ID();
 	$do_not_show = carbon_get_post_meta($post_id, 'aun_do_not_show_tours');
 	if (!$do_not_show && check_cf_complex($tour_blocks)) {
 	?>
-		<div id="tours_block">
+		<div id="tours_block" class="content-block">
 			<?php
 			foreach ($tour_blocks as $tour_block) {
 			?>

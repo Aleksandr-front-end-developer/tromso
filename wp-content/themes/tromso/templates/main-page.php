@@ -23,7 +23,7 @@ $post_id = get_the_ID();
 	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show1');
 	if (!$do_not_show && ($image != 0 || check_cf($title) || check_cf($subtitle) || check_cf($description) || check_cf($rating) || check_cf($link_text) || check_cf($button_text))) {
 	?>
-		<section class="hero relative h-screen flex items-center justify-center overflow-hidden">
+		<section class="hero relative h-screen flex items-center justify-center overflow-hidden content-block">
 			<div
 				class="absolute inset-0 z-0 hero-bg">
 				<?php
@@ -110,7 +110,7 @@ $post_id = get_the_ID();
 	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show3');
 	if (!$do_not_show && (check_cf($title) || check_cf($description) || check_cf_complex($cards))) {
 	?>
-		<section id="about" class="py-20 bg-gradient-to-b from-gray-50 to-white">
+		<section id="about" class="py-20 bg-gradient-to-b from-gray-50 to-white content-block">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center mb-16">
 					<?php
@@ -154,7 +154,7 @@ $post_id = get_the_ID();
 	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show4');
 	if (!$do_not_show && ($image != 0 || check_cf($title) || check_cf($description1) || check_cf($description2))) {
 	?>
-		<section class="py-20 bg-gray-50 why">
+		<section class="py-20 bg-gray-50 why content-block">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center mb-12">
 					<?php
@@ -186,7 +186,7 @@ $post_id = get_the_ID();
 	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show5');
 	if (!$do_not_show && (check_cf($title) || check_cf($description) || check_cf_complex($cards))) {
 	?>
-		<section class="py-20 bg-white">
+		<section class="py-20 bg-white content-block">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center mb-12">
 					<?php
@@ -229,7 +229,7 @@ $post_id = get_the_ID();
 	$do_not_show = carbon_get_post_meta($post_id, 'main_do_not_show6');
 	if (!$do_not_show && check_cf_complex($items)) {
 	?>
-		<section class=" bg-white section-spollers">
+		<section class=" bg-white section-spollers content-block">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div data-spollers data-one-spoller class="spollers">
 					<?php
@@ -251,7 +251,7 @@ $post_id = get_the_ID();
 	$shortcode = carbon_get_post_meta($post_id, 'main_reviews_shortcode');
 	if ($shortcode!='') {
 	?>
-	<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+	<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 content-block">
 		<?php echo do_shortcode($shortcode) ?>
 	</section>
 	<?php } ?>
@@ -261,7 +261,7 @@ $post_id = get_the_ID();
 	$content = mb_trim(get_the_content());
 	if ($content != '') {
 	?>
-		<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><?php echo $content; ?></section>
+		<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 content-block"><?php echo $content; ?></section>
 	<?php } ?>
 
 </main>

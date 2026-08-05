@@ -27,7 +27,7 @@ $post_id = get_the_ID();
 	$content = mb_trim(get_the_content());
 	if ($content != '') {
 	?>
-		<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><?php echo $content; ?></section>
+		<section class="content max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 content-block"><?php echo $content; ?></section>
 	<?php } ?>
 
 	<?php

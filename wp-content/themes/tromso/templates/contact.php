@@ -22,7 +22,7 @@ $post_id = get_the_ID();
 	}
 	?>
 
-	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 content-block">
 		<div class="grid md:grid-cols-2 gap-12">
 			<div>
 				<?php

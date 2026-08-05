@@ -21,7 +21,7 @@ $post_id = get_the_ID();
   ?>
 
 
-	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 content-block">
     <?php
     $blocks = carbon_get_post_meta($post_id, 'stm_section_2_list');
     if (check_cf_complex($blocks)) {

@@ -147,7 +147,7 @@ if ("undefined" !== typeof jQuery) {
     var currentPath = window.location.pathname;
 
     // Обработка кликов
-    $("section.content a[href]")
+    $(".content-block a[href]")
       .not(".no-track")
       .on("click", function (e) {
         var $link = $(this);

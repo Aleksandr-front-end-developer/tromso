@@ -30,7 +30,7 @@ $post_id = get_the_ID();
 
 	</section>
 
-	<section class="section tour-hero pb-16">
+	<section class="section tour-hero pb-16 content-block">
 		<div class="tour-hero__container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="tour-hero__wrapper">
 				<div class="tour-hero__image">
@@ -109,7 +109,7 @@ $post_id = get_the_ID();
 		</div>
 	</section>
 
-	<section class="section tour-content">
+	<section class="section tour-content content-block">
 		<div class="tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 pt-4 border-t border-gray-200 mx-auto">
 			<?php
 			$title = carbon_get_post_meta($post_id, 'tour_section_1_title');
@@ -199,7 +199,7 @@ $post_id = get_the_ID();
 	$do_not_show = carbon_get_post_meta($post_id, 'tours_do_not_show4');
 	if (!$do_not_show && check_cf($description)) {
 	?>
-		<section class="tour-content__content tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 py-16 pt-4  mx-auto">
+		<section class="tour-content__content tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 py-16 pt-4  mx-auto content-block">
 			<div>
 				<?php echo wpautop($description); ?>
 			</div>
@@ -212,7 +212,7 @@ $post_id = get_the_ID();
 	$do_not_show = carbon_get_post_meta($post_id, 'tours_do_not_show5');
 	if (!$do_not_show && check_cf($link)) {
 	?>
-		<section class="tour-reviews tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 py-16 pt-4  mx-auto">
+		<section class="tour-reviews tour-content__container content max-w-6xl px-4 sm:px-6 lg:px-8 py-16 pt-4  mx-auto content-block">
 			<div class="tour-reviews__wrapper">
 				<h2 class="content-block__title"><?php _e('Reviews', 'tromso'); ?></h2>
 				<div class="stars flex items-center justify-center gap-2 mb-8 bg-white/10 backdrop-blur-sm  rounded-full inline-flex">
