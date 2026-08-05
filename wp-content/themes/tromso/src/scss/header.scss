@@ -22,17 +22,28 @@ header.menu-open .mobile-menu {
 	display: block;
 }
 
+header nav.items-center.gap-8 .relative {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
 .tours-dropdown {
 	display: none;
 	position: absolute;
 	top: 100%;
 	left: 0;
-	margin-top: 8px;
+	// margin-top: 8px;
 	background: white;
 	border-radius: 8px;
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 	padding: 8px 0;
 	min-width: 180px;
+
+
+}
+
+.tours-dropdown.mt-2 {
+	margin-top: 0;
 }
 
 .desktop-header {
@@ -85,6 +96,7 @@ img.custom-logo {
 	display: inline-block;
 	width: max-content;
 	font-family: Inter, system-ui, sans-serif;
+	flex-shrink: 0;
 }
 
 .select-styled {
@@ -100,24 +112,46 @@ img.custom-logo {
 	cursor: pointer;
 	transition: border-color 0.2s ease, color 0.2s ease;
 	white-space: nowrap;
+	gap: 8px;
+	/* Додаємо відступ між елементами */
 }
 
 .select-styled.active {
 	border-color: #00ff66;
 }
 
-.select-text {
+/* Контейнер для прапорця і тексту */
+.select-content {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	flex: 1;
+}
+
+/* Стилі для прапорця в кастомному селекті */
+.select-content img {
+	width: 16px;
+	height: 11px;
+	flex-shrink: 0;
 	display: inline-block;
+	vertical-align: middle;
+}
+
+/* Стилі для тексту в кастомному селекті */
+.select-content span {
+	display: inline-block;
+	margin-left: 0 !important;
+	/* Скасовуємо margin від Polylang */
+	vertical-align: middle;
 }
 
 .arrow-icon {
 	width: 1rem;
 	height: 1rem;
-	margin-left: 7px;
+	flex-shrink: 0;
 	color: rgba(255, 255, 255, 0.5);
 	transition: transform 0.2s ease;
 	pointer-events: none;
-	flex-shrink: 0;
 }
 
 .select-styled.active .arrow-icon {
@@ -150,12 +184,30 @@ img.custom-logo {
 }
 
 .polylang-flags li a {
-	display: block;
+	display: flex;
+	/* Змінюємо на flex для кращого вирівнювання */
+	align-items: center;
+	gap: 8px;
 	padding: 0.5rem 1rem;
 	color: #ffffff;
 	text-decoration: none;
 	white-space: nowrap;
 	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Стилі для прапорців у списку */
+.polylang-flags li a img {
+	width: 16px;
+	height: 11px;
+	flex-shrink: 0;
+	display: inline-block;
+}
+
+/* Стилі для тексту в списку */
+.polylang-flags li a span {
+	display: inline-block;
+	margin-left: 0 !important;
+	/* Скасовуємо margin від Polylang */
 }
 
 .polylang-flags li a:hover {
@@ -171,4 +223,12 @@ img.custom-logo {
 
 .polylang-flags li[rel="hide"] {
 	display: none;
+}
+
+.relative:hover .tours-dropdown {
+	display: block;
+}
+
+.select-content img {
+	margin-right: 8px;
 }

@@ -223,17 +223,25 @@
             $(".mobile-menu").toggle(isOpen);
             $("header").toggleClass("menu-open", isOpen);
         }));
-        $(".tours-trigger").on("mouseenter", (function() {
-            showToursDropdown = true;
-            $(".tours-dropdown").show();
-        }));
-        $(".tours-trigger, .tours-dropdown").on("mouseleave", (function() {
-            setTimeout((() => {
-                if (!$(".tours-trigger").is(":hover") && !$(".tours-dropdown").is(":hover")) {
-                    showToursDropdown = false;
-                    $(".tours-dropdown").hide();
-                }
-            }), 100);
+        $("header nav div.relative").each((function() {
+            const $container = $(this);
+            const $trigger = $container.find(".tours-trigger");
+            const $dropdown = $container.find(".tours-dropdown");
+            let timeout;
+            $trigger.on("mouseenter", (function() {
+                clearTimeout(timeout);
+                showToursDropdown = true;
+                $dropdown.show();
+            }));
+            $trigger.add($dropdown).on("mouseleave", (function() {
+                clearTimeout(timeout);
+                timeout = setTimeout((() => {
+                    if (!$trigger.is(":hover") && !$dropdown.is(":hover")) {
+                        showToursDropdown = false;
+                        $dropdown.hide();
+                    }
+                }), 150);
+            }));
         }));
         $(".tour-item").on("click", (function(e) {
             e.preventDefault();
@@ -354,11 +362,12 @@
         }
         $(".polylang-flags").each((function() {
             const $this = $(this);
+            const $currentLang = $this.find("li.current-lang");
             $this.wrap('<div class="select-custom"></div>');
-            $this.before(`\n    <div class="select-styled">\n      <span class="select-text"></span>\n      <svg class="arrow-icon" viewBox="0 0 20 20" fill="currentColor">\n        <path d="M5 7l5 5 5-5H5z"/>\n      </svg>\n    </div>\n  `);
+            const currentHtml = $currentLang.html();
+            $this.before(`\n    <div class="select-styled">\n      <span class="select-content">\n        ${currentHtml}\n      </span>\n      <svg class="arrow-icon" viewBox="0 0 20 20" fill="currentColor">\n        <path d="M5 7l5 5 5-5H5z"/>\n      </svg>\n    </div>\n  `);
             const $styledSelect = $this.prev(".select-styled");
-            const $text = $styledSelect.find(".select-text");
-            $text.text($this.find("li.current-lang").text());
+            const $selectContent = $styledSelect.find(".select-content");
             $styledSelect.on("click", (function(e) {
                 e.stopPropagation();
                 $(".select-styled.active").not(this).removeClass("active").next(".polylang-flags").removeClass("open");
@@ -367,7 +376,7 @@
             }));
             $this.find("li").on("click", (function(e) {
                 e.stopPropagation();
-                $text.text($(this).text());
+                $selectContent.html($(this).html());
                 $styledSelect.removeClass("active");
                 $this.removeClass("open");
             }));

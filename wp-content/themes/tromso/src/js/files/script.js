@@ -52,19 +52,27 @@ if ("undefined" !== typeof jQuery) {
     });
 
     // Ховер для десктопного dropdown
-    $(".tours-trigger").on("mouseenter", function () {
-      showToursDropdown = true;
-      $(".tours-dropdown").show();
-    });
+    $("header nav div.relative").each(function () {
+      const $container = $(this);
+      const $trigger = $container.find(".tours-trigger");
+      const $dropdown = $container.find(".tours-dropdown");
+      let timeout;
 
-    $(".tours-trigger, .tours-dropdown").on("mouseleave", function () {
-      // Додаємо невелику затримку для кращого UX
-      setTimeout(() => {
-        if (!$(".tours-trigger").is(":hover") && !$(".tours-dropdown").is(":hover")) {
-          showToursDropdown = false;
-          $(".tours-dropdown").hide();
-        }
-      }, 100);
+      $trigger.on("mouseenter", function () {
+        clearTimeout(timeout);
+        showToursDropdown = true;
+        $dropdown.show();
+      });
+
+      $trigger.add($dropdown).on("mouseleave", function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          if (!$trigger.is(":hover") && !$dropdown.is(":hover")) {
+            showToursDropdown = false;
+            $dropdown.hide();
+          }
+        }, 150);
+      });
     });
 
     // Кліки по пунктах меню туров
@@ -289,14 +297,16 @@ if ("undefined" !== typeof jQuery) {
     //================= селект для переключения языка polylang ===============
     $(".polylang-flags").each(function () {
       const $this = $(this);
+      const $currentLang = $this.find("li.current-lang");
 
-      // обгортаємо
       $this.wrap('<div class="select-custom"></div>');
+      const currentHtml = $currentLang.html();
 
-      // вставляємо кастомний селект
       $this.before(`
     <div class="select-styled">
-      <span class="select-text"></span>
+      <span class="select-content">
+        ${currentHtml}
+      </span>
       <svg class="arrow-icon" viewBox="0 0 20 20" fill="currentColor">
         <path d="M5 7l5 5 5-5H5z"/>
       </svg>
@@ -304,9 +314,7 @@ if ("undefined" !== typeof jQuery) {
   `);
 
       const $styledSelect = $this.prev(".select-styled");
-      const $text = $styledSelect.find(".select-text");
-
-      $text.text($this.find("li.current-lang").text());
+      const $selectContent = $styledSelect.find(".select-content");
 
       $styledSelect.on("click", function (e) {
         e.stopPropagation();
@@ -320,7 +328,7 @@ if ("undefined" !== typeof jQuery) {
       $this.find("li").on("click", function (e) {
         e.stopPropagation();
 
-        $text.text($(this).text());
+        $selectContent.html($(this).html());
 
         $styledSelect.removeClass("active");
         $this.removeClass("open");
@@ -331,7 +339,6 @@ if ("undefined" !== typeof jQuery) {
         $this.removeClass("open");
       });
     });
-
     //================= END JQUERY ===============
   });
 }
