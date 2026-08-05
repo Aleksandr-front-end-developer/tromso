@@ -288,7 +288,7 @@
         }));
         var currentDomain = window.location.hostname;
         var currentPath = window.location.pathname;
-        $("section.content a[href]").not(".no-track").on("click", (function(e) {
+        $(".content-block a[href]").not(".no-track").on("click", (function(e) {
             var $link = $(this);
             var href = $link.attr("href");
             if (languageData.current_language == languageData.default_language) return;
