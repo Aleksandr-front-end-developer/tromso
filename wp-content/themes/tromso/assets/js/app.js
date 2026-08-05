@@ -288,7 +288,7 @@
         }));
         var currentDomain = window.location.hostname;
         var currentPath = window.location.pathname;
-        $("a[href]").not(".no-track").on("click", (function(e) {
+        $("section.content a[href]").not(".no-track").on("click", (function(e) {
             var $link = $(this);
             var href = $link.attr("href");
             if (languageData.current_language == languageData.default_language) return;
@@ -298,7 +298,10 @@
             if (isSamePageWithAnchor(href, currentPath, currentDomain)) return;
             if (hasLanguagePrefix(href, languageData.current_language)) return;
             e.preventDefault();
-            var params = {};
+            var params = {
+                check_for_language: "1",
+                current_language: languageData.current_language
+            };
             var absoluteUrl = $link.prop("href");
             var newUrl = addParamsToUrl(absoluteUrl, params);
             if (href.indexOf("#") !== -1) {

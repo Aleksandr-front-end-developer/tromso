@@ -147,7 +147,7 @@ if ("undefined" !== typeof jQuery) {
     var currentPath = window.location.pathname;
 
     // Обработка кликов
-    $("a[href]")
+    $("section.content a[href]")
       .not(".no-track")
       .on("click", function (e) {
         var $link = $(this);
@@ -188,8 +188,8 @@ if ("undefined" !== typeof jQuery) {
         e.preventDefault();
 
         var params = {
-          //check_for_language: "1",
-          //current_language: languageData.current_language,
+          check_for_language: "1",
+          current_language: languageData.current_language,
         };
 
         var absoluteUrl = $link.prop("href");
