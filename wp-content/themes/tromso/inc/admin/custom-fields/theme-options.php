@@ -214,7 +214,7 @@ function mainmenu_theme_options()
       Field::make( 'checkbox', 'translate_change_slugs' . $lang, 'Change slugs for existing translated posts when changing titles (with 301 redirect if the Redirection plugin is installed)' . $lang_str )
       ->set_option_value( '1' )
       ->set_autoload(true),
-      Field::make( 'checkbox', 'translate_show_country_flag' . $lang, 'Show country flag in language switcher' . $lang_str )
+      Field::make( 'checkbox', 'translate_show_country_flag' . $lang, 'Show country flags in language switcher' . $lang_str )
       ->set_option_value( '1' )
       ->set_autoload(true),
       Field::make( 'html', 'translate_chat_gpt_error_information_text' . $lang )
