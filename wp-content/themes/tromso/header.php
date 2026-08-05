@@ -44,7 +44,7 @@
 						</svg>
 					</button>
 					<ul class="polylang-flags">
-						<?php if (function_exists('pll_the_languages')) pll_the_languages(array('show_names' => 1, 'show_flags' => 0)); ?>
+						<?php if (function_exists('pll_the_languages')) pll_the_languages(array('show_names' => 1, 'show_flags' => intval(get_option('_translate_show_country_flag')))); ?>
 					</ul>
 				</div>
 			</div>
