@@ -197,11 +197,11 @@ function do_deepseek_translate($request_url, $request_timeout = 30, $clearing_ti
   if (count($languages)>0 && $key!='' && $model!='' && $message!='')
   {
     //Обработка новых фрагментов
-    $sql = $wpdb->prepare( "SELECT * FROM ".TRANSLATE_FRAGMENTS_TABLE." WHERE translated='%d' LIMIT 5", 0 );
-    $rows = $wpdb->get_results($sql, ARRAY_A);
-    if (count($rows)>0)
+    for ($i=0; $i<5; $i++)
     {
-      foreach ($rows as $row)
+      $sql = $wpdb->prepare( "SELECT * FROM ".TRANSLATE_FRAGMENTS_TABLE." WHERE translated='%d' LIMIT 1", 0 );
+      $row = $wpdb->get_row($sql, ARRAY_A);
+      if (!is_null($row))
       {
         $wpdb->update( TRANSLATE_FRAGMENTS_TABLE, array( 'translated' => 2, 'updated_ts' => time() ), array( 'id' => $row['id'] ) );
         if (is_string($row['source_text']) && ((bool) preg_match('/[\p{L}]/u', $row['source_text']))===true)
