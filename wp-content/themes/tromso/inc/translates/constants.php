@@ -13,6 +13,7 @@ $count = ($chat_gpt_text_symbols_qty==0) ? 500 : $chat_gpt_text_symbols_qty;
 define('MAX_FRAGMENT_LENGTH', $count);
 
 define('CHAT_GPT_API_URL', 'https://api.openai.com/v1/responses');
+define('DEEPSEEK_API_URL', 'https://api.deepseek.com/v1/responses');
 
 define('MENU_FIELDS_FOR_TRANSLATE', array(
   'post_title',

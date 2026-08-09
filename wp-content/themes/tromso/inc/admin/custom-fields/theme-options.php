@@ -166,9 +166,14 @@ function mainmenu_theme_options()
     ->set_page_parent( $basic_options_container )
 
 		->add_tab('Common options', array_merge($buttons, array(
-      Field::make( 'text', 'translate_chat_gpt_key' . $lang, 'Chat GPT API key' . $lang_str )
+      Field::make( 'radio', 'translate_ai_provider' . $lang, 'AI provider' . $lang_str )
+      ->set_options( array(
+        'openai' => 'OpenAI (Chat GPT)',
+        'deepseek' => 'Deepseek',
+      ) ),
+      Field::make( 'text', 'translate_chat_gpt_key' . $lang, 'AI API key' . $lang_str )
       ->set_autoload(true),
-      Field::make( 'text', 'translate_chat_gpt_model' . $lang, 'Chat GPT model ("gpt-4" for example)' . $lang_str )
+      Field::make( 'text', 'translate_chat_gpt_model' . $lang, 'AI model ("gpt-4" for example)' . $lang_str )
       ->set_autoload(true),
       Field::make( 'radio', 'translate_as' . $lang, 'Transate as' . $lang_str )
       ->set_options( array(
@@ -191,7 +196,7 @@ function mainmenu_theme_options()
       ) )
       ->set_default_value( 500 )
       ->set_autoload(true),
-      Field::make( 'textarea', 'translate_chat_gpt_message' . $lang, 'Chat GPT prompt (%src_lng% - source language, %dest_lng% - translate language)' . $lang_str )
+      Field::make( 'textarea', 'translate_chat_gpt_message' . $lang, 'AI prompt (%src_lng% - source language, %dest_lng% - translate language)' . $lang_str )
       ->set_conditional_logic( array(
           'relation' => 'AND',
           array(
@@ -201,7 +206,7 @@ function mainmenu_theme_options()
           )
       ) )
       ->set_autoload(true),
-      Field::make( 'textarea', 'translate_chat_gpt_message_html' . $lang, 'Chat GPT prompt for HTML (%src_lng% - source language, %dest_lng% - translate language)' . $lang_str )
+      Field::make( 'textarea', 'translate_chat_gpt_message_html' . $lang, 'AI prompt for HTML (%src_lng% - source language, %dest_lng% - translate language)' . $lang_str )
       ->set_conditional_logic( array(
           'relation' => 'AND',
           array(
@@ -218,7 +223,7 @@ function mainmenu_theme_options()
       ->set_option_value( '1' )
       ->set_autoload(true),
       Field::make( 'html', 'translate_chat_gpt_error_information_text' . $lang )
-      ->set_html( '<h2><strong>Last error requesting CHAT GPT:</strong></h2><p style="color:red">'.$tarnslate_error.'</p>' ),
+      ->set_html( '<h2><strong>Last AI error message:</strong></h2><p style="color:red">'.$tarnslate_error.'</p>' ),
     )))
     
     ->add_tab('Theme static', array(

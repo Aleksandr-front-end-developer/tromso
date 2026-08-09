@@ -25,14 +25,30 @@ function cron_add_five_min( $schedules ) {
 	return $schedules;
 }
 
-add_action( 'chat_gpt_translate', 'do_chat_gpt_translate' );
+add_action( 'chat_gpt_translate', 'do_ai_translate' );
 
 if( ! wp_next_scheduled( 'chat_gpt_translate' ) )
 {
   wp_schedule_event( time(), 'one_min', 'chat_gpt_translate');
 }
 
-function do_chat_gpt_translate() {
+function do_ai_translate() {
+  global $wpdb;
+
+  $ai_provider = carbon_get_theme_option_lng('translate_ai_provider');
+  
+  if ($ai_provider == 'openai')
+  {
+    do_responses_api_translate(CHAT_GPT_API_URL);
+  
+  } elseif ($ai_provider == 'deepseek')
+  {
+    do_deepseek_translate(DEEPSEEK_API_URL, 2900, 5000);
+  }
+}
+
+
+function do_responses_api_translate($request_url, $request_timeout = 30, $clearing_timeout = 1200) {
   global $wpdb;
 
   $key = carbon_get_theme_option_lng('translate_chat_gpt_key');
@@ -88,13 +104,13 @@ function do_chat_gpt_translate() {
               ],
             ];
 
-            $response = wp_remote_post(CHAT_GPT_API_URL, array(
+            $response = wp_remote_post($request_url, array(
               'body' => json_encode($data),
               'headers' => array(
                 "Content-Type" => "application/json",
                 "Authorization" => "Bearer ".$key,
               ),
-              'timeout' => 30,
+              'timeout' => $request_timeout,
             ));
 
             if ( !is_wp_error( $response ) )
@@ -125,12 +141,12 @@ function do_chat_gpt_translate() {
     {
       foreach ($rows as $row)
       {
-        $response = wp_remote_get(CHAT_GPT_API_URL.'/'.$row['resp_id'], array(
+        $response = wp_remote_get($request_url.'/'.$row['resp_id'], array(
           'headers' => array(
             "Content-Type" => "application/json",
             "Authorization" => "Bearer ".$key,
           ),
-          'timeout' => 30,
+          'timeout' => $request_timeout,
         ));
 
         if ( !is_wp_error( $response ) )
@@ -158,10 +174,162 @@ function do_chat_gpt_translate() {
     }
     
     //Обработка зависших фрагментов
-    $sql = $wpdb->prepare( "UPDATE ".TRANSLATE_FRAGMENTS_TABLE." SET translated='0'  WHERE (translated='2' OR translated='3') AND updated_ts<'%d'", time()-1200 );
+    $sql = $wpdb->prepare( "UPDATE ".TRANSLATE_FRAGMENTS_TABLE." SET translated='0'  WHERE (translated='2' OR translated='3') AND updated_ts<'%d'", time()-$clearing_timeout );
     $wpdb->query($sql);
   }
 }
+
+
+function do_deepseek_translate($request_url, $request_timeout = 30, $clearing_timeout = 1200) {
+  global $wpdb;
+  
+  set_time_limit(3000);
+
+  $key = carbon_get_theme_option_lng('translate_chat_gpt_key');
+  $model = carbon_get_theme_option_lng('translate_chat_gpt_model');
+  $translate_as = carbon_get_theme_option_lng('translate_as');
+
+
+  $message = ($translate_as=='text') ? carbon_get_theme_option_lng('translate_chat_gpt_message') : carbon_get_theme_option_lng('translate_chat_gpt_message_html');
+
+  $languages = get_languages_list_full();
+
+  if (count($languages)>0 && $key!='' && $model!='' && $message!='')
+  {
+    //Обработка новых фрагментов
+    $sql = $wpdb->prepare( "SELECT * FROM ".TRANSLATE_FRAGMENTS_TABLE." WHERE translated='%d' LIMIT 5", 0 );
+    $rows = $wpdb->get_results($sql, ARRAY_A);
+    if (count($rows)>0)
+    {
+      foreach ($rows as $row)
+      {
+        $wpdb->update( TRANSLATE_FRAGMENTS_TABLE, array( 'translated' => 2, 'updated_ts' => time() ), array( 'id' => $row['id'] ) );
+        if (is_string($row['source_text']) && ((bool) preg_match('/[\p{L}]/u', $row['source_text']))===true)
+        {
+          $final_message = $message;
+          foreach ($languages as $language)
+          {
+            if ($row['lng_from']==$language->slug) $final_message = mb_ereg_replace('%src_lng%', $language->name, $final_message); 
+            if ($row['lng_to']==$language->slug) $final_message = mb_ereg_replace('%dest_lng%', $language->name, $final_message); 
+          }
+          if (mb_strpos($final_message, '%src_lng%')===false && mb_strpos($final_message, '%dest_lng%')===false)
+          {
+            $data = [
+              "model" => $model,
+              "input" => $final_message."\n\n".$row['source_text'],
+              "max_output_tokens" => 384000,
+              "background" => true,
+              "text" => [
+                "format" => [
+                  "type" => "json_schema",
+                  "name" => "text_translate",
+                  "strict" => true,
+                  "schema" => [
+                    "type" => "object",
+                    "properties" => [
+                      "translated_text" => [
+                        "type" => "string",
+                        "description" => "Переведённый текст, согласно заданию"
+                      ]
+                    ],
+                    "required" => ["translated_text"],
+                    "additionalProperties" => false
+                  ]
+                ]
+              ],
+              "reasoning" => [
+                "effort" => "none"
+              ]
+            ];
+
+              //error_log(print_r('id '.$row['id'], true));
+              //error_log(print_r('timeout '.$request_timeout, true));
+            $response = wp_remote_post($request_url, array(
+              'body' => json_encode($data),
+              'headers' => array(
+                "Content-Type" => "application/json",
+                "Authorization" => "Bearer ".$key,
+              ),
+              'timeout' => $request_timeout,
+            ));
+              //error_log(print_r('id '.$row['id'], true));
+              //error_log(print_r($response, true));
+
+            if ( !is_wp_error( $response ) )
+            {
+              $body = json_decode(wp_remote_retrieve_body( $response ), true);
+              //error_log(print_r($body, true));
+              if (isset($body['output'][0]['content'][0]['text']) && isset($body['output'][0]['status']) && $body['output'][0]['status']=='completed')
+              {
+                $output = json_decode($body['output'][0]['content'][0]['text'], true);
+                
+                if (is_array($output) && isset($output['translated_text']))
+                {
+                  $wpdb->update( TRANSLATE_FRAGMENTS_TABLE, array( 'translate' => $output['translated_text'], 'translated' => 1 ), array( 'id' => $row['id'] ) );
+                }
+              }
+
+              if (is_array($body) && isset($body['error']) && isset($body['error']['message']))
+              {
+                $updated = update_option( 'last_translate_error', wp_date('d.m.Y H:i') . ' - ' . $body['error']['message'], true );
+              }
+            }
+          }
+        } else
+        {
+          $wpdb->update( TRANSLATE_FRAGMENTS_TABLE, array( 'translate' => $row['source_text'], 'translated' => 1 ), array( 'id' => $row['id'] ) );
+        }
+      }
+    }
+
+    //Обработка ответов GPT
+    /*$sql = $wpdb->prepare( "SELECT * FROM ".TRANSLATE_FRAGMENTS_TABLE." WHERE translated='%d' AND resp_id IS NOT NULL", 3 );
+    $rows = $wpdb->get_results($sql, ARRAY_A);
+    if (count($rows)>0)
+    {
+      foreach ($rows as $row)
+      {
+        $response = wp_remote_get($request_url.'/'.$row['resp_id'], array(
+          'headers' => array(
+            "Content-Type" => "application/json",
+            "Authorization" => "Bearer ".$key,
+          ),
+          'timeout' => $request_timeout,
+        ));
+              error_log(print_r($response, true));
+
+        if ( !is_wp_error( $response ) )
+        {
+          $body = json_decode(wp_remote_retrieve_body( $response ), true);
+              error_log(print_r($body, true));
+          if (isset($body['object']) && $body['object']=='response' && isset($body['status']) && $body['status']=='completed' && isset($body['id']))
+          {
+            if (isset($body['output'][0]['content'][0]['text']))
+            {
+              $output = json_decode($body['output'][0]['content'][0]['text'], true);
+              
+              if (is_array($output) && isset($output['translated_text']))
+              {
+                $wpdb->update( TRANSLATE_FRAGMENTS_TABLE, array( 'translate' => $output['translated_text'], 'translated' => 1 ), array( 'id' => $row['id'] ) );
+              }
+            }
+          }
+                
+          if (is_array($body) && isset($body['error']) && isset($body['error']['message']))
+          {
+            $updated = update_option( 'last_translate_error', wp_date('d.m.Y H:i') . ' - ' . $body['error']['message'], true );
+          }
+        }
+      }
+    }*/
+    
+    //Обработка зависших фрагментов
+    $sql = $wpdb->prepare( "UPDATE ".TRANSLATE_FRAGMENTS_TABLE." SET translated='0'  WHERE (translated='2' OR translated='3') AND updated_ts<'%d'", time()-$clearing_timeout );
+    $wpdb->query($sql);
+  }
+}
+
+
 
 
 add_action( 'final_doing_after_translate', 'do_final_doing_after_translate' );
