@@ -194,13 +194,19 @@ global $polylang;
       $translate,
   );
   
-  copy_menu_locations($row['entity_id'], $new_menu_id, $row['lng_to']);
+  if ($items_result)
+  {
+    copy_menu_locations($row['entity_id'], $new_menu_id, $row['lng_to']);
+    return true;
+  }
 
-  return true;
+  return false;
 }
 
 function create_translated_menu_items($tree, $new_menu_id, $source_lang, $target_lang, $translate = false, $parent_id = 0) {
 
+    $all_translated_exists = true;
+    
     foreach ($tree as $node)
     {
       $item = $node['item'];
@@ -216,11 +222,13 @@ function create_translated_menu_items($tree, $new_menu_id, $source_lang, $target
           $translated_object_id = pll_get_post($item->object_id, $target_lang);
           if (!$translated_object_id) {
               $translated_object_id = $item->object_id;
+              $all_translated_exists = false;
           }
       } elseif ($item->type == 'taxonomy') {
           $translated_object_id = pll_get_term($item->object_id, $target_lang);
           if (!$translated_object_id) {
               $translated_object_id = $item->object_id;
+              $all_translated_exists = false;
           }
       }
       
@@ -272,7 +280,7 @@ function create_translated_menu_items($tree, $new_menu_id, $source_lang, $target
       }
     }
     
-    return true;
+    return $all_translated_exists;
 }
 
 
