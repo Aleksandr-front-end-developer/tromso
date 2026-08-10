@@ -123,6 +123,7 @@ global $wpdb;
    
     unset($new_post['ID']);
     unset($new_post['guid']);
+    unset($new_post['post_name']);
     $new_post['post_title'] = $title;
     $new_post['post_status'] = 'draft';
     $new_post_id = wp_insert_post( $new_post, false, false );
